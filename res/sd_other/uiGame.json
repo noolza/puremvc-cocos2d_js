@@ -1,0 +1,681 @@
+{
+  "ID": "7f98b4c9-b3c6-4831-90b1-27e21a9e5092",
+  "Version": "2.3.0.1",
+  "Name": "uiGame",
+  "Content": {
+    "Content": {
+      "Animation": {
+        "Duration": 0,
+        "Speed": 1.0,
+        "Timelines": [],
+        "ctype": "TimelineActionData"
+      },
+      "AnimationList": [],
+      "ObjectData": {
+        "Tag": 18,
+        "Children": [
+          {
+            "BackColorAlpha": 252,
+            "SingleColor": {
+              "R": 40,
+              "G": 63,
+              "B": 146
+            },
+            "FirstColor": {
+              "R": 150,
+              "G": 200
+            },
+            "EndColor": {},
+            "ColorVector": {
+              "ScaleY": 1.0
+            },
+            "Scale9Width": 1,
+            "Scale9Height": 1,
+            "AnchorPoint": {},
+            "Position": {
+              "X": 0.0,
+              "Y": 0.0
+            },
+            "Scale": {
+              "ScaleX": 1.0,
+              "ScaleY": 1.0
+            },
+            "CColor": {},
+            "IconVisible": false,
+            "PrePosition": {
+              "X": 0.0,
+              "Y": 0.0
+            },
+            "PercentWidthEnable": true,
+            "PercentHeightEnable": true,
+            "PercentWidthEnabled": true,
+            "PercentHeightEnabled": true,
+            "PreSize": {
+              "X": 1.0,
+              "Y": 1.0
+            },
+            "Tag": 20,
+            "Children": [
+              {
+                "FontSize": 14,
+                "ButtonText": "",
+                "TextColor": {
+                  "R": 65,
+                  "G": 65,
+                  "B": 70
+                },
+                "DisabledFileData": {
+                  "Type": "PlistSubImage",
+                  "Path": "zanting.png",
+                  "Plist": "images.plist"
+                },
+                "PressedFileData": {
+                  "Type": "PlistSubImage",
+                  "Path": "zanting.png",
+                  "Plist": "images.plist"
+                },
+                "NormalFileData": {
+                  "Type": "PlistSubImage",
+                  "Path": "zanting.png",
+                  "Plist": "images.plist"
+                },
+                "Scale9Enable": true,
+                "Scale9Width": 64,
+                "Scale9Height": 64,
+                "OutlineSize": 0,
+                "ShadowOffsetX": 0,
+                "ShadowOffsetY": 0,
+                "TouchEnable": true,
+                "AnchorPoint": {
+                  "ScaleX": 0.5,
+                  "ScaleY": 0.5
+                },
+                "Position": {
+                  "X": 583.0,
+                  "Y": 903.0
+                },
+                "Scale": {
+                  "ScaleX": 1.0,
+                  "ScaleY": 1.0
+                },
+                "CColor": {},
+                "IconVisible": false,
+                "PrePosition": {
+                  "X": 0.9109,
+                  "Y": 0.9406
+                },
+                "PreSize": {
+                  "X": 0.1,
+                  "Y": 0.0667
+                },
+                "HorizontalEdge": "RightEdge",
+                "VerticalEdge": "TopEdge",
+                "LeftMargin": 551.0,
+                "RightMargin": 25.0,
+                "TopMargin": 25.0,
+                "BottomMargin": 871.0,
+                "Tag": 31,
+                "ActionTag": -562594598,
+                "Size": {
+                  "X": 64.0,
+                  "Y": 64.0
+                },
+                "Name": "Button_pause",
+                "ctype": "ButtonObjectData"
+              },
+              {
+                "FileData": {
+                  "Type": "PlistSubImage",
+                  "Path": "daojishi.png",
+                  "Plist": "images.plist"
+                },
+                "AnchorPoint": {
+                  "ScaleX": 0.5,
+                  "ScaleY": 0.5
+                },
+                "Position": {
+                  "X": 320.0,
+                  "Y": 480.0
+                },
+                "Scale": {
+                  "ScaleX": 1.0,
+                  "ScaleY": 1.0
+                },
+                "Alpha": 153,
+                "CColor": {},
+                "IconVisible": false,
+                "PositionPercentXEnabled": true,
+                "PositionPercentYEnabled": true,
+                "PrePosition": {
+                  "X": 0.5,
+                  "Y": 0.5
+                },
+                "PreSize": {
+                  "X": 0.6016,
+                  "Y": 0.4
+                },
+                "LeftMargin": 127.5,
+                "RightMargin": 127.5,
+                "TopMargin": 288.0,
+                "BottomMargin": 288.0,
+                "Tag": 32,
+                "ActionTag": 1422776267,
+                "Size": {
+                  "X": 385.0,
+                  "Y": 384.0
+                },
+                "Name": "daojishi_3",
+                "ctype": "SpriteObjectData"
+              },
+              {
+                "IsCustomSize": true,
+                "FontSize": 100,
+                "LabelText": "0",
+                "HorizontalAlignmentType": "HT_Center",
+                "OutlineSize": 0,
+                "ShadowOffsetX": 0,
+                "ShadowOffsetY": 0,
+                "AnchorPoint": {
+                  "ScaleX": 0.5,
+                  "ScaleY": 0.5
+                },
+                "Position": {
+                  "X": 320.0,
+                  "Y": 480.0
+                },
+                "Scale": {
+                  "ScaleX": 2.0,
+                  "ScaleY": 2.0
+                },
+                "Alpha": 61,
+                "CColor": {},
+                "IconVisible": false,
+                "PositionPercentXEnabled": true,
+                "PositionPercentYEnabled": true,
+                "PrePosition": {
+                  "X": 0.5,
+                  "Y": 0.5
+                },
+                "PreSize": {
+                  "X": 0.1734,
+                  "Y": 0.1177
+                },
+                "LeftMargin": 264.5,
+                "RightMargin": 264.5,
+                "TopMargin": 423.5,
+                "BottomMargin": 423.5,
+                "Tag": 34,
+                "ActionTag": 113924168,
+                "Size": {
+                  "X": 111.0,
+                  "Y": 113.0
+                },
+                "Name": "Text_score",
+                "ctype": "TextObjectData"
+              },
+              {
+                "FileData": {
+                  "Type": "PlistSubImage",
+                  "Path": "spermHead.png",
+                  "Plist": "images.plist"
+                },
+                "AnchorPoint": {
+                  "ScaleX": 0.5,
+                  "ScaleY": 0.5
+                },
+                "Position": {
+                  "X": 0.0,
+                  "Y": 672.0
+                },
+                "Scale": {
+                  "ScaleX": 1.0,
+                  "ScaleY": 1.0
+                },
+                "CColor": {},
+                "IconVisible": false,
+                "PrePosition": {
+                  "X": 0.0,
+                  "Y": 0.7
+                },
+                "PreSize": {
+                  "X": 0.0,
+                  "Y": 0.0
+                },
+                "LeftMargin": -39.0,
+                "RightMargin": 601.0,
+                "TopMargin": 235.5,
+                "BottomMargin": 619.5,
+                "Tag": 63,
+                "Children": [
+                  {
+                    "FileData": {
+                      "Type": "Normal",
+                      "Path": "face.png",
+                      "Plist": ""
+                    },
+                    "AnchorPoint": {
+                      "ScaleX": 0.5,
+                      "ScaleY": 0.5
+                    },
+                    "Position": {
+                      "X": 39.0,
+                      "Y": 67.0425
+                    },
+                    "Scale": {
+                      "ScaleX": 0.26,
+                      "ScaleY": 0.26
+                    },
+                    "CColor": {},
+                    "IconVisible": false,
+                    "PositionPercentYEnabled": true,
+                    "PrePosition": {
+                      "X": 0.5,
+                      "Y": 0.6385
+                    },
+                    "PreSize": {
+                      "X": 3.2949,
+                      "Y": 2.4381
+                    },
+                    "HorizontalEdge": "BothEdge",
+                    "LeftMargin": -89.5,
+                    "RightMargin": -89.5,
+                    "TopMargin": -90.0425,
+                    "BottomMargin": -60.9575,
+                    "Tag": 64,
+                    "ActionTag": -1080567668,
+                    "Size": {
+                      "X": 257.0,
+                      "Y": 256.0
+                    },
+                    "Name": "face",
+                    "ctype": "SpriteObjectData"
+                  },
+                  {
+                    "FileData": {
+                      "Type": "PlistSubImage",
+                      "Path": "sperm_0.png",
+                      "Plist": "sperm.plist"
+                    },
+                    "AnchorPoint": {
+                      "ScaleX": 0.6407
+                    },
+                    "Position": {
+                      "X": 38.9999,
+                      "Y": 100.0001
+                    },
+                    "Scale": {
+                      "ScaleX": 1.0,
+                      "ScaleY": 1.0
+                    },
+                    "CColor": {},
+                    "IconVisible": false,
+                    "PrePosition": {
+                      "X": 0.5,
+                      "Y": 0.9524
+                    },
+                    "PreSize": {
+                      "X": 0.0,
+                      "Y": 0.0
+                    },
+                    "LeftMargin": 10.1684,
+                    "RightMargin": 22.8316,
+                    "TopMargin": -69.0001,
+                    "BottomMargin": 100.0001,
+                    "Tag": 65,
+                    "ActionTag": -662664434,
+                    "Size": {
+                      "X": 45.0,
+                      "Y": 74.0
+                    },
+                    "Name": "sperm_tail",
+                    "ctype": "SpriteObjectData"
+                  },
+                  {
+                    "AnchorPoint": {},
+                    "Position": {
+                      "X": 39.0,
+                      "Y": 0.0
+                    },
+                    "Scale": {
+                      "ScaleX": 1.0,
+                      "ScaleY": 1.0
+                    },
+                    "CColor": {},
+                    "IconVisible": true,
+                    "PositionPercentXEnabled": true,
+                    "PrePosition": {
+                      "X": 0.5,
+                      "Y": 0.0
+                    },
+                    "PreSize": {
+                      "X": 0.0,
+                      "Y": 0.0
+                    },
+                    "LeftMargin": 39.0,
+                    "RightMargin": 39.0,
+                    "TopMargin": 105.0,
+                    "Tag": 59,
+                    "ActionTag": -1706238650,
+                    "Size": {
+                      "X": 0.0,
+                      "Y": 0.0
+                    },
+                    "Name": "help_0",
+                    "ctype": "SingleNodeObjectData"
+                  },
+                  {
+                    "AnchorPoint": {},
+                    "Position": {
+                      "X": 14.75,
+                      "Y": 19.0
+                    },
+                    "Scale": {
+                      "ScaleX": 1.0,
+                      "ScaleY": 1.0
+                    },
+                    "CColor": {},
+                    "IconVisible": true,
+                    "PositionPercentXEnabled": true,
+                    "PrePosition": {
+                      "X": 0.1891,
+                      "Y": 0.181
+                    },
+                    "PreSize": {
+                      "X": 0.0,
+                      "Y": 0.0
+                    },
+                    "LeftMargin": 14.75,
+                    "RightMargin": 63.25,
+                    "TopMargin": 86.0,
+                    "BottomMargin": 19.0,
+                    "Tag": 62,
+                    "ActionTag": 1315346320,
+                    "Size": {
+                      "X": 0.0,
+                      "Y": 0.0
+                    },
+                    "Name": "help_1",
+                    "ctype": "SingleNodeObjectData"
+                  },
+                  {
+                    "AnchorPoint": {},
+                    "Position": {
+                      "X": 63.25,
+                      "Y": 19.0
+                    },
+                    "Scale": {
+                      "ScaleX": 1.0,
+                      "ScaleY": 1.0
+                    },
+                    "CColor": {},
+                    "IconVisible": true,
+                    "PositionPercentXEnabled": true,
+                    "PrePosition": {
+                      "X": 0.8109,
+                      "Y": 0.181
+                    },
+                    "PreSize": {
+                      "X": 0.0,
+                      "Y": 0.0
+                    },
+                    "LeftMargin": 63.25,
+                    "RightMargin": 14.75,
+                    "TopMargin": 86.0,
+                    "BottomMargin": 19.0,
+                    "Tag": 63,
+                    "ActionTag": 563513632,
+                    "Size": {
+                      "X": 0.0,
+                      "Y": 0.0
+                    },
+                    "Name": "help_2",
+                    "ctype": "SingleNodeObjectData"
+                  },
+                  {
+                    "AnchorPoint": {},
+                    "Position": {
+                      "X": 74.0001,
+                      "Y": 50.0
+                    },
+                    "Scale": {
+                      "ScaleX": 1.0,
+                      "ScaleY": 1.0
+                    },
+                    "CColor": {},
+                    "IconVisible": true,
+                    "PositionPercentXEnabled": true,
+                    "PrePosition": {
+                      "X": 0.9487,
+                      "Y": 0.4762
+                    },
+                    "PreSize": {
+                      "X": 0.0,
+                      "Y": 0.0
+                    },
+                    "LeftMargin": 74.0001,
+                    "RightMargin": 3.9999,
+                    "TopMargin": 55.0,
+                    "BottomMargin": 50.0,
+                    "Tag": 61,
+                    "ActionTag": 1242400812,
+                    "Size": {
+                      "X": 0.0,
+                      "Y": 0.0
+                    },
+                    "Name": "help_3",
+                    "ctype": "SingleNodeObjectData"
+                  },
+                  {
+                    "AnchorPoint": {},
+                    "Position": {
+                      "X": 4.0001,
+                      "Y": 50.0
+                    },
+                    "Scale": {
+                      "ScaleX": 1.0,
+                      "ScaleY": 1.0
+                    },
+                    "CColor": {},
+                    "IconVisible": true,
+                    "PositionPercentXEnabled": true,
+                    "PrePosition": {
+                      "X": 0.0513,
+                      "Y": 0.4762
+                    },
+                    "PreSize": {
+                      "X": 0.0,
+                      "Y": 0.0
+                    },
+                    "LeftMargin": 4.0001,
+                    "RightMargin": 73.9999,
+                    "TopMargin": 55.0,
+                    "BottomMargin": 50.0,
+                    "Tag": 60,
+                    "ActionTag": 1554022311,
+                    "Size": {
+                      "X": 0.0,
+                      "Y": 0.0
+                    },
+                    "Name": "help_4",
+                    "ctype": "SingleNodeObjectData"
+                  }
+                ],
+                "ActionTag": 773065107,
+                "Size": {
+                  "X": 78.0,
+                  "Y": 105.0
+                },
+                "Name": "sperm",
+                "ctype": "SpriteObjectData"
+              },
+              {
+                "BackColorAlpha": 102,
+                "SingleColor": {
+                  "R": 150,
+                  "G": 200
+                },
+                "FirstColor": {
+                  "R": 150,
+                  "G": 200
+                },
+                "EndColor": {},
+                "ColorVector": {
+                  "ScaleY": 1.0
+                },
+                "StretchWidthEnable": true,
+                "VisibleForFrame": false,
+                "AnchorPoint": {},
+                "Position": {
+                  "X": 0.0,
+                  "Y": 460.2962
+                },
+                "Scale": {
+                  "ScaleX": 1.0,
+                  "ScaleY": 1.0
+                },
+                "CColor": {},
+                "IconVisible": false,
+                "PrePosition": {
+                  "X": 0.0,
+                  "Y": 0.4795
+                },
+                "PreSize": {
+                  "X": 1.0,
+                  "Y": 0.0333
+                },
+                "HorizontalEdge": "BothEdge",
+                "TopMargin": 467.7038,
+                "BottomMargin": 460.2962,
+                "Tag": 70,
+                "Children": [
+                  {
+                    "FileData": {
+                      "Type": "PlistSubImage",
+                      "Path": "zudangwu_1.png",
+                      "Plist": "images.plist"
+                    },
+                    "Scale9Enable": true,
+                    "Scale9OriginX": 18,
+                    "Scale9OriginY": 16,
+                    "Scale9Width": 1,
+                    "Scale9Height": 1,
+                    "StretchHeightEnable": true,
+                    "AnchorPoint": {
+                      "ScaleX": 0.5,
+                      "ScaleY": 0.5
+                    },
+                    "Position": {
+                      "X": 0.0,
+                      "Y": 16.0
+                    },
+                    "Scale": {
+                      "ScaleX": 1.0,
+                      "ScaleY": 1.0
+                    },
+                    "CColor": {},
+                    "IconVisible": false,
+                    "PositionPercentYEnabled": true,
+                    "PrePosition": {
+                      "X": 0.0,
+                      "Y": 0.5
+                    },
+                    "PreSize": {
+                      "X": 0.5719,
+                      "Y": 1.0
+                    },
+                    "LeftMargin": -183.0,
+                    "RightMargin": 457.0,
+                    "Tag": 68,
+                    "ActionTag": 1272878348,
+                    "Size": {
+                      "X": 366.0,
+                      "Y": 32.0
+                    },
+                    "Name": "Image_wall_0",
+                    "ctype": "ImageViewObjectData"
+                  },
+                  {
+                    "FileData": {
+                      "Type": "PlistSubImage",
+                      "Path": "zudangwu_1.png",
+                      "Plist": "images.plist"
+                    },
+                    "Scale9Enable": true,
+                    "Scale9OriginX": 18,
+                    "Scale9OriginY": 16,
+                    "Scale9Width": 1,
+                    "Scale9Height": 1,
+                    "StretchHeightEnable": true,
+                    "AnchorPoint": {
+                      "ScaleX": 0.5,
+                      "ScaleY": 0.5
+                    },
+                    "Position": {
+                      "X": 640.0,
+                      "Y": 16.0
+                    },
+                    "Scale": {
+                      "ScaleX": 1.0,
+                      "ScaleY": 1.0
+                    },
+                    "CColor": {},
+                    "IconVisible": false,
+                    "PositionPercentXEnabled": true,
+                    "PositionPercentYEnabled": true,
+                    "PrePosition": {
+                      "X": 1.0,
+                      "Y": 0.5
+                    },
+                    "PreSize": {
+                      "X": 0.5719,
+                      "Y": 1.0
+                    },
+                    "LeftMargin": 457.0,
+                    "RightMargin": -183.0,
+                    "Tag": 71,
+                    "ActionTag": 581353065,
+                    "Size": {
+                      "X": 366.0,
+                      "Y": 32.0
+                    },
+                    "Name": "Image_wall_1",
+                    "ctype": "ImageViewObjectData"
+                  }
+                ],
+                "ActionTag": -190337174,
+                "Size": {
+                  "X": 640.0,
+                  "Y": 32.0
+                },
+                "Name": "Panel_wall",
+                "ctype": "PanelObjectData"
+              }
+            ],
+            "ActionTag": -863414336,
+            "Size": {
+              "X": 640.0,
+              "Y": 960.0
+            },
+            "Name": "Panel_root",
+            "ctype": "PanelObjectData"
+          }
+        ],
+        "Size": {
+          "X": 640.0,
+          "Y": 960.0
+        },
+        "Name": "Scene",
+        "ctype": "SingleNodeObjectData"
+      },
+      "UsedResources": [
+        "sperm.plist",
+        "sperm.png",
+        "face.png",
+        "images.plist",
+        "images.png"
+      ],
+      "ctype": "GameProjectData"
+    }
+  },
+  "Type": "Scene"
+}

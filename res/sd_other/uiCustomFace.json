@@ -1,0 +1,598 @@
+{
+  "ID": "69d7bbb3-e835-4508-8730-1cb8e2ac15f4",
+  "Version": "2.3.0.1",
+  "Name": "uiCustomFace",
+  "Content": {
+    "Content": {
+      "Animation": {
+        "Duration": 0,
+        "Speed": 1.0,
+        "Timelines": [],
+        "ctype": "TimelineActionData"
+      },
+      "AnimationList": [],
+      "ObjectData": {
+        "Tag": 30,
+        "Children": [
+          {
+            "SingleColor": {
+              "R": 109,
+              "G": 25,
+              "B": 233
+            },
+            "FirstColor": {
+              "R": 150,
+              "G": 200
+            },
+            "EndColor": {},
+            "ColorVector": {
+              "ScaleY": 1.0
+            },
+            "Scale9Width": 1,
+            "Scale9Height": 1,
+            "TouchEnable": true,
+            "AnchorPoint": {},
+            "Position": {
+              "X": 0.0,
+              "Y": 0.0
+            },
+            "Scale": {
+              "ScaleX": 1.0,
+              "ScaleY": 1.0
+            },
+            "CColor": {},
+            "IconVisible": false,
+            "PrePosition": {
+              "X": 0.0,
+              "Y": 0.0
+            },
+            "PercentWidthEnable": true,
+            "PercentHeightEnable": true,
+            "PercentWidthEnabled": true,
+            "PercentHeightEnabled": true,
+            "PreSize": {
+              "X": 1.0,
+              "Y": 1.0
+            },
+            "Tag": 31,
+            "Children": [
+              {
+                "FontSize": 48,
+                "ButtonText": "确定完成",
+                "FontResource": {
+                  "Type": "Normal",
+                  "Path": "hanyimanbu.ttf",
+                  "Plist": ""
+                },
+                "TextColor": {},
+                "DisabledFileData": {
+                  "Type": "PlistSubImage",
+                  "Path": "huikuangduanchu.png",
+                  "Plist": "images.plist"
+                },
+                "PressedFileData": {
+                  "Type": "PlistSubImage",
+                  "Path": "huikuangduanchu.png",
+                  "Plist": "images.plist"
+                },
+                "NormalFileData": {
+                  "Type": "PlistSubImage",
+                  "Path": "huikuangduanchu.png",
+                  "Plist": "images.plist"
+                },
+                "Scale9Enable": true,
+                "Scale9Width": 273,
+                "Scale9Height": 96,
+                "OutlineSize": 0,
+                "ShadowOffsetX": 0,
+                "ShadowOffsetY": 0,
+                "TouchEnable": true,
+                "AnchorPoint": {
+                  "ScaleX": 0.5,
+                  "ScaleY": 0.5
+                },
+                "Position": {
+                  "X": 320.0055,
+                  "Y": 122.0004
+                },
+                "Scale": {
+                  "ScaleX": 1.0,
+                  "ScaleY": 1.0
+                },
+                "CColor": {},
+                "IconVisible": false,
+                "PrePosition": {
+                  "X": 0.5,
+                  "Y": 0.1271
+                },
+                "PreSize": {
+                  "X": 0.364,
+                  "Y": 0.072
+                },
+                "HorizontalEdge": "BothEdge",
+                "VerticalEdge": "BottomEdge",
+                "LeftMargin": 183.5055,
+                "RightMargin": 183.4945,
+                "TopMargin": 789.9996,
+                "BottomMargin": 74.0004,
+                "Tag": 32,
+                "ActionTag": 1412325416,
+                "Size": {
+                  "X": 273.0,
+                  "Y": 96.0
+                },
+                "Name": "Button_ok",
+                "ctype": "ButtonObjectData"
+              },
+              {
+                "FileData": {
+                  "Type": "PlistSubImage",
+                  "Path": "buzuo.png",
+                  "Plist": "images.plist"
+                },
+                "AnchorPoint": {
+                  "ScaleX": 0.5,
+                  "ScaleY": 0.5
+                },
+                "Position": {
+                  "X": 320.0,
+                  "Y": 599.5952
+                },
+                "Scale": {
+                  "ScaleX": 1.0,
+                  "ScaleY": 1.0
+                },
+                "CColor": {},
+                "IconVisible": false,
+                "PositionPercentXEnabled": true,
+                "PositionPercentYEnabled": true,
+                "PrePosition": {
+                  "X": 0.5,
+                  "Y": 0.6246
+                },
+                "PreSize": {
+                  "X": 0.4703,
+                  "Y": 0.3156
+                },
+                "LeftMargin": 169.5,
+                "RightMargin": 169.5,
+                "TopMargin": 208.9048,
+                "BottomMargin": 448.0952,
+                "Tag": 35,
+                "ActionTag": -1438929876,
+                "Size": {
+                  "X": 301.0,
+                  "Y": 303.0
+                },
+                "Name": "GAMELOGO_2_2_2",
+                "ctype": "SpriteObjectData"
+              },
+              {
+                "FileData": {
+                  "Type": "PlistSubImage",
+                  "Path": "xiaolian.png",
+                  "Plist": "images.plist"
+                },
+                "AnchorPoint": {
+                  "ScaleX": 0.5,
+                  "ScaleY": 0.5
+                },
+                "Position": {
+                  "X": 122.6987,
+                  "Y": 225.2844
+                },
+                "Scale": {
+                  "ScaleX": 0.7,
+                  "ScaleY": 0.7
+                },
+                "CColor": {},
+                "IconVisible": false,
+                "PrePosition": {
+                  "X": 0.1917,
+                  "Y": 0.2347
+                },
+                "PreSize": {
+                  "X": 0.0,
+                  "Y": 0.0
+                },
+                "HorizontalEdge": "LeftEdge",
+                "VerticalEdge": "BottomEdge",
+                "LeftMargin": 74.6987,
+                "RightMargin": 469.3013,
+                "TopMargin": 686.7156,
+                "BottomMargin": 177.2844,
+                "Tag": 36,
+                "ActionTag": -1281298213,
+                "Size": {
+                  "X": 96.0,
+                  "Y": 96.0
+                },
+                "Name": "huikuangduanchu_3_4",
+                "ctype": "SpriteObjectData"
+              },
+              {
+                "FileData": {
+                  "Type": "PlistSubImage",
+                  "Path": "huikuangduanchu.png",
+                  "Plist": "images.plist"
+                },
+                "AnchorPoint": {
+                  "ScaleX": 0.5,
+                  "ScaleY": 0.5
+                },
+                "Position": {
+                  "X": 320.0095,
+                  "Y": 336.7993
+                },
+                "Scale": {
+                  "ScaleX": 1.0,
+                  "ScaleY": 1.0
+                },
+                "CColor": {},
+                "IconVisible": false,
+                "PositionPercentXEnabled": true,
+                "PositionPercentYEnabled": true,
+                "PrePosition": {
+                  "X": 0.5,
+                  "Y": 0.3508
+                },
+                "PreSize": {
+                  "X": 0.4266,
+                  "Y": 0.1
+                },
+                "LeftMargin": 183.5095,
+                "RightMargin": 183.4905,
+                "TopMargin": 575.2007,
+                "BottomMargin": 288.7993,
+                "Tag": 39,
+                "ActionTag": -124096648,
+                "Size": {
+                  "X": 273.0,
+                  "Y": 96.0
+                },
+                "Name": "huikuangduanchu_5_8",
+                "ctype": "SpriteObjectData"
+              },
+              {
+                "FileData": {
+                  "Type": "Normal",
+                  "Path": "face.png",
+                  "Plist": ""
+                },
+                "AnchorPoint": {
+                  "ScaleX": 0.5,
+                  "ScaleY": 0.5
+                },
+                "Position": {
+                  "X": 319.9995,
+                  "Y": 599.4951
+                },
+                "Scale": {
+                  "ScaleX": 1.0,
+                  "ScaleY": 1.0
+                },
+                "CColor": {},
+                "IconVisible": false,
+                "PrePosition": {
+                  "X": 0.5,
+                  "Y": 0.6245
+                },
+                "PreSize": {
+                  "X": 0.4016,
+                  "Y": 0.2667
+                },
+                "HorizontalEdge": "BothEdge",
+                "VerticalEdge": "TopEdge",
+                "LeftMargin": 296.9995,
+                "RightMargin": 297.0005,
+                "TopMargin": 337.5049,
+                "BottomMargin": 576.4951,
+                "Tag": 40,
+                "ActionTag": 1562634393,
+                "Size": {
+                  "X": 257.0,
+                  "Y": 256.0
+                },
+                "Name": "Image_face",
+                "ctype": "SpriteObjectData"
+              },
+              {
+                "FontSize": 48,
+                "LabelText": "姓名",
+                "FontResource": {
+                  "Type": "Normal",
+                  "Path": "hanyimanbu.ttf",
+                  "Plist": ""
+                },
+                "OutlineSize": 0,
+                "ShadowOffsetX": 0,
+                "ShadowOffsetY": 0,
+                "AnchorPoint": {
+                  "ScaleX": 0.5,
+                  "ScaleY": 0.5
+                },
+                "Position": {
+                  "X": 320.0168,
+                  "Y": 336.8007
+                },
+                "Scale": {
+                  "ScaleX": 1.0,
+                  "ScaleY": 1.0
+                },
+                "CColor": {},
+                "IconVisible": false,
+                "PositionPercentXEnabled": true,
+                "PositionPercentYEnabled": true,
+                "PrePosition": {
+                  "X": 0.5,
+                  "Y": 0.3508
+                },
+                "PreSize": {
+                  "X": 0.3406,
+                  "Y": 0.0562
+                },
+                "LeftMargin": 272.0168,
+                "RightMargin": 271.9832,
+                "TopMargin": 599.1993,
+                "BottomMargin": 312.8007,
+                "Tag": 42,
+                "ActionTag": -935298142,
+                "Size": {
+                  "X": 96.0,
+                  "Y": 48.0
+                },
+                "Name": "Text_name",
+                "ctype": "TextObjectData"
+              },
+              {
+                "FontSize": 48,
+                "LabelText": "好友是用来    的!\n",
+                "FontResource": {
+                  "Type": "Normal",
+                  "Path": "hanyimanbu.ttf",
+                  "Plist": ""
+                },
+                "OutlineSize": 0,
+                "ShadowOffsetX": 0,
+                "ShadowOffsetY": 0,
+                "AnchorPoint": {
+                  "ScaleY": 0.5
+                },
+                "Position": {
+                  "X": 173.9946,
+                  "Y": 225.019
+                },
+                "Scale": {
+                  "ScaleX": 1.0,
+                  "ScaleY": 1.0
+                },
+                "CColor": {},
+                "IconVisible": false,
+                "PrePosition": {
+                  "X": 0.2719,
+                  "Y": 0.2344
+                },
+                "PreSize": {
+                  "X": 0.3406,
+                  "Y": 0.0562
+                },
+                "HorizontalEdge": "LeftEdge",
+                "VerticalEdge": "BottomEdge",
+                "LeftMargin": 173.9946,
+                "RightMargin": 58.0054,
+                "TopMargin": 710.981,
+                "BottomMargin": 201.019,
+                "Tag": 44,
+                "ActionTag": -1198952415,
+                "Size": {
+                  "X": 408.0,
+                  "Y": 48.0
+                },
+                "Name": "Text_tip_10",
+                "ctype": "TextObjectData"
+              },
+              {
+                "FileData": {
+                  "Type": "PlistSubImage",
+                  "Path": "xiaoxie.png",
+                  "Plist": "images.plist"
+                },
+                "AnchorPoint": {
+                  "ScaleX": 0.5,
+                  "ScaleY": 0.5
+                },
+                "Position": {
+                  "X": 462.9873,
+                  "Y": 228.0002
+                },
+                "Scale": {
+                  "ScaleX": 1.0,
+                  "ScaleY": 1.0
+                },
+                "CColor": {},
+                "IconVisible": false,
+                "PrePosition": {
+                  "X": 0.7234,
+                  "Y": 0.2375
+                },
+                "PreSize": {
+                  "X": 0.0,
+                  "Y": 0.0
+                },
+                "LeftMargin": 419.9873,
+                "RightMargin": 134.0127,
+                "TopMargin": 703.4998,
+                "BottomMargin": 199.5002,
+                "Tag": 38,
+                "ActionTag": -785613788,
+                "Size": {
+                  "X": 86.0,
+                  "Y": 57.0
+                },
+                "Name": "xiaoxie_4_6",
+                "ctype": "SpriteObjectData"
+              },
+              {
+                "FontSize": 48,
+                "ButtonText": "本地图片",
+                "FontResource": {
+                  "Type": "Normal",
+                  "Path": "hanyimanbu.ttf",
+                  "Plist": ""
+                },
+                "TextColor": {},
+                "DisabledFileData": {
+                  "Type": "PlistSubImage",
+                  "Path": "huikuangduanchu.png",
+                  "Plist": "images.plist"
+                },
+                "PressedFileData": {
+                  "Type": "PlistSubImage",
+                  "Path": "huikuangduanchu.png",
+                  "Plist": "images.plist"
+                },
+                "NormalFileData": {
+                  "Type": "PlistSubImage",
+                  "Path": "huikuangduanchu.png",
+                  "Plist": "images.plist"
+                },
+                "Scale9Enable": true,
+                "Scale9Width": 273,
+                "Scale9Height": 96,
+                "OutlineSize": 0,
+                "ShadowOffsetX": 0,
+                "ShadowOffsetY": 0,
+                "TouchEnable": true,
+                "AnchorPoint": {
+                  "ScaleX": 0.5,
+                  "ScaleY": 0.5
+                },
+                "Position": {
+                  "X": 161.5,
+                  "Y": 862.0
+                },
+                "Scale": {
+                  "ScaleX": 1.0,
+                  "ScaleY": 1.0
+                },
+                "CColor": {},
+                "IconVisible": false,
+                "PrePosition": {
+                  "X": 0.2523,
+                  "Y": 0.8979
+                },
+                "PreSize": {
+                  "X": 0.364,
+                  "Y": 0.072
+                },
+                "HorizontalEdge": "LeftEdge",
+                "VerticalEdge": "TopEdge",
+                "LeftMargin": 25.0,
+                "RightMargin": 342.0,
+                "TopMargin": 50.0,
+                "BottomMargin": 814.0,
+                "Tag": 45,
+                "ActionTag": 1054457304,
+                "Size": {
+                  "X": 273.0,
+                  "Y": 96.0
+                },
+                "Name": "Button_local",
+                "ctype": "ButtonObjectData"
+              },
+              {
+                "FontSize": 48,
+                "ButtonText": "抢拍好友",
+                "FontResource": {
+                  "Type": "Normal",
+                  "Path": "hanyimanbu.ttf",
+                  "Plist": ""
+                },
+                "TextColor": {},
+                "DisabledFileData": {
+                  "Type": "PlistSubImage",
+                  "Path": "huikuangduanchu.png",
+                  "Plist": "images.plist"
+                },
+                "PressedFileData": {
+                  "Type": "PlistSubImage",
+                  "Path": "huikuangduanchu.png",
+                  "Plist": "images.plist"
+                },
+                "NormalFileData": {
+                  "Type": "PlistSubImage",
+                  "Path": "huikuangduanchu.png",
+                  "Plist": "images.plist"
+                },
+                "Scale9Enable": true,
+                "Scale9Width": 273,
+                "Scale9Height": 96,
+                "OutlineSize": 0,
+                "ShadowOffsetX": 0,
+                "ShadowOffsetY": 0,
+                "TouchEnable": true,
+                "AnchorPoint": {
+                  "ScaleX": 0.5,
+                  "ScaleY": 0.5
+                },
+                "Position": {
+                  "X": 478.5081,
+                  "Y": 862.0
+                },
+                "Scale": {
+                  "ScaleX": 1.0,
+                  "ScaleY": 1.0
+                },
+                "CColor": {},
+                "IconVisible": false,
+                "PrePosition": {
+                  "X": 0.7477,
+                  "Y": 0.8979
+                },
+                "PreSize": {
+                  "X": 0.364,
+                  "Y": 0.072
+                },
+                "HorizontalEdge": "RightEdge",
+                "VerticalEdge": "TopEdge",
+                "LeftMargin": 342.0081,
+                "RightMargin": 24.9919,
+                "TopMargin": 50.0,
+                "BottomMargin": 814.0,
+                "Tag": 46,
+                "ActionTag": -935568965,
+                "Size": {
+                  "X": 273.0,
+                  "Y": 96.0
+                },
+                "Name": "Button_friend",
+                "ctype": "ButtonObjectData"
+              }
+            ],
+            "ActionTag": 208155076,
+            "Size": {
+              "X": 640.0,
+              "Y": 960.0
+            },
+            "Name": "Panel_root",
+            "ctype": "PanelObjectData"
+          }
+        ],
+        "Size": {
+          "X": 640.0,
+          "Y": 960.0
+        },
+        "Name": "Scene",
+        "ctype": "SingleNodeObjectData"
+      },
+      "UsedResources": [
+        "face.png",
+        "images.plist",
+        "images.png",
+        "hanyimanbu.ttf"
+      ],
+      "ctype": "GameProjectData"
+    }
+  },
+  "Type": "Scene"
+}

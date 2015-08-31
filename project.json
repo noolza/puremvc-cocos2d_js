@@ -1,0 +1,36 @@
+{
+    "project_type":"javascript",
+    "debugMode":1,
+    "showFPS":true,
+    "frameRate":60,
+    "id":"gameCanvas",
+    "renderMode":0,
+    "engineDir":"frameworks/cocos2d-html5",
+    "modules":[
+        "cocos2d",
+        "cocostudio"
+    ],
+    "jsList":[
+        "src/resource.js",
+        "src/libs/puremvc-1.0.1.js",
+        "src/extends/CCBReader.js",
+        "src/functions.js",
+        "src/constants.js",
+        "src/MyApp.js",
+        "src/app/base/AudioMgr.js",
+        "src/app/base/AnimationMgr.js",
+        "src/app/base/Component.js",
+        "src/app/base/ViewBase.js",
+        "src/app/commands/startup.js",
+        "src/app/commands/showWindow.js",
+        "src/app/commands/runScene.js",
+        "src/app/views/ViewTransition.js",
+        "src/app/views/scene/mainScene.js",
+        "src/app/views/ui/uiMain.js",
+        "src/app/views/ui/uiGame.js",
+        "src/app/views/ui/uiGamePause.js",
+        "src/app/views/ui/uiGameOver.js",
+        "src/app/views/ui/uiCustomFace.js",
+        "src/app/views/ui/uiLog.js"
+    ]
+}

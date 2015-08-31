@@ -1,0 +1,10 @@
+{
+	"searchPaths":[
+		"res/common/img",
+		"res/hall/img",
+		"res/hall/ccbi",
+		"res/hall/font",
+		"res/hall/nopack"
+	],
+	"viewType":"ccbi"
+}
