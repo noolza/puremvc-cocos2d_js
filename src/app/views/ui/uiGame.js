@@ -2,13 +2,13 @@
 var uiGame = Class("uiGame",ViewBase)
 
 uiGame.prototype.initOption = function(){
-//	this.setOption('isClickClose',true)
+	this.setOption('resourceType','json')
 }
 
 uiGame.prototype.onCreate = function(  ){
     AudioMgr.playBackgroundMusic(res.bgMusic);
 	
-	this.app.getView('mainScene').randomColor();
+	this.facade.getView('mainScene').randomColor();
 
 	this.sperm = this.getChildByName('Panel_root/sperm');
 	this.tail  = this.sperm.getChildByName('sperm_tail');
@@ -235,7 +235,7 @@ uiGame.prototype.onRemoved = function(  ){
 
 uiGame.prototype.onButtonClick = function( sender ){
 	if(sender.getName()=='Button_pause'){
-		this.app.addView('uiGamePause');
+		this.trigger('ShowWindow',['uiGamePause'])
 		this.isPause = true;
 	}
 }

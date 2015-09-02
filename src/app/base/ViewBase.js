@@ -50,40 +50,6 @@ ViewBase.prototype._init = function(isShow) {
     }
 }
 
-// ViewBase.prototype.getInitParent = function() {
-//     var parent = this.getOption('parent')
-
-//     if (typeof(parent) == 'string') {
-//         var view = this.facade.getView(parent)
-//         if (view != null) {
-//             parent = view.getViewComponent()
-//             if (parent == null) {
-//                 cc.log('[ViewBase] view parent not find ' + this.NAME + ' parentName: ' + parent);
-//                 return null;
-//             }
-//         } else return null
-//     }
-
-//     if (parent == null) {
-//         parent = this.facade.runningScene;
-//     }
-//     return parent
-// }
-
-// ViewBase.prototype.setupViewMode = function() {
-//     var mode = this.getOption('mode');
-//     if (mode == ViewBase.MODE_TRANSPARENTS) {
-//         this.viewComponent.touchEnabled(this.getOption('canDrag'));
-//     } else {
-//         if (this.onTouchBegan || this.onTouchMoved || this.onTouchEnded || this.getOption('isClickClose') || this.getOption('canDrag')) {
-//             this.viewComponent.touchEnabled(true);
-//         }
-//     }
-//     if (this.getOption('showAction') == 'fadeIn' || this.getOption('hideAction') == 'fadeOut') {
-//         this.viewComponent.setCascadeOpacityEnabled(true);
-//     }
-// }
-
 ViewBase.prototype.needTouch = function() {
     return this.onTouchBegan || this.onTouchMoved || this.onTouchEnded || this.getOption('isClickClose') || this.getOption('canDrag');
 }

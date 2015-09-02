@@ -2,7 +2,7 @@
 var uiMain = Class("uiMain",ViewBase)
 
 uiMain.prototype.initOption = function(){
-//	this.setOption('isClickClose',true)
+	this.setOption('resourceType','json');
 }
 
 uiMain.prototype.onCreate = function(  ){
@@ -39,10 +39,12 @@ uiMain.prototype.onButtonClick = function( sender ){
 	var btnName = sender.getName();
 	if(btnName == 'Button_start'){
 		// this.close();
-		this.getFacade().addView('uiGame');
+		// this.getFacade().addView('uiGame');
+		this.trigger('ShowWindow',['uiGame']);
 	}else if(btnName = 'Button_customHead'){
 		// this.close();
-		this.app.addView('uiCustomFace');
+		// this.app.addView('uiCustomFace');
+		// this.trigger('ShowWindow',['uiCustomFace']);	
 	}
 }
 

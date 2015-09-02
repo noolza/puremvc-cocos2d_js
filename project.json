@@ -21,6 +21,7 @@
         "src/app/base/UIFactory.js",
         "src/app/base/AnimationMgr.js",
         "src/app/base/Component.js",
+        "src/app/base/CCSComponent.js",
         "src/app/base/CCBComponent.js",
         "src/app/base/ViewOption.js",
         "src/app/base/ViewBase.js",

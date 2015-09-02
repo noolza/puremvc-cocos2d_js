@@ -1,8 +1,11 @@
 
 var UIFactory = {
     // resPath : must end with '/'
-    init: function(resPath,facade) {
-        this._resPath = resPath;
+    searchPaths : {
+        'json':'res/sd_other/',
+        'ccbi':'res/'
+    },
+    init: function(facade) {
         this.facade = facade;
         cc.BuilderReader.registerController('CCBProxy', {});
     },
@@ -38,10 +41,11 @@ var UIFactory = {
         var node = null;
         var component = null;
         if(option.resourceType == Const.UI_FILE_TYPE_JSON){
-            node = this.loadCCS(resourceFile,view);
+            node = this.loadCCS(this.searchPaths[option.resourceType] + resourceFile,view);
             component = new CCSComponent(view);
         } else {
             var parentSize = parent.getContentSize();
+            cc.BuilderReader.setResourcePath(this.searchPaths[option.resourceType]);
             node = this.loadCCBI(resourceFile,view,parentSize);
             component = new CCBComponent(view);
         }
@@ -49,6 +53,7 @@ var UIFactory = {
             cc.log('[Warn]resourceFile not exist or read error ' + resourceFile);
             node = new cc.Node();
         } 
+
         LogNodesName(node);
         component.addChild(node);
         parent.addChild(component,option.getZOrder(),option.tag);
@@ -58,7 +63,6 @@ var UIFactory = {
         if (!parentSize || cc.sizeEqualToSize(parentSize, cc.SizeZero())) {
             parentSize = cc.winSize;
         }
-        cc.BuilderReader.setResourcePath(this._resPath);
         if (jsb.fileUtils.isFileExist(resourceFile)) {
 
             readNode = cc.BuilderReader.load(resourceFile, delegate, parentSize);
@@ -96,14 +100,14 @@ var UIFactory = {
     },
     loadCCS : function(resourceFile,delegate) {
     
-        var readObj = ccs.load(this._resPath + resourceFile);
+        var readObj = ccs.load(resourceFile);
         var readNode = readObj.node;
         
         if(readNode){
             this.bindEvent(readNode,delegate)   
         }
         return readNode; 
-    },   
+    }, 
     bindEvent : function(root, delegate) {
         var children = root.getChildren();
         for (var i = 0; i < children.length; i++) {
