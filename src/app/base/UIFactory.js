@@ -1,195 +1,134 @@
 
 var UIFactory = {
     // resPath : must end with '/'
-    init: function(resPath,viewClass) {
+    init: function(resPath,facade) {
         this._resPath = resPath;
+        this.facade = facade;
+        cc.BuilderReader.registerController('CCBProxy', {});
     },
-    createView : function (resourceFilename, controller, parentSize) {
-        cc.log('resName: ' + this._resourceFile);
-        var nameSplit = resourceFilename.split('.');
-        this.NAME = nameSplit[0];
-        this._resType = nameSplit[1] || Const.UI_FILE_TYPE_JSON;
-        this._resourceFile = nameSplit[0] + '.' + this._resType;
-
-        var readNode = null;
-        if (this._resType == Const.UI_FILE_TYPE_JSON) {
-            var readObj = ccs.load(this._resPath + this._resourceFile);
-            readNode = readObj.node;
-            if (readNode && this._delegate) {
-                this.bindEvent(root);
-            }
-        } else if (this._resType == Const.UI_FILE_TYPE_CCBI) {
-            if (parentSize) {
-                if (parentSize.width == 0 || parentSize.height == 0)
-                    parentSize = cc.winSize;
-            } else parentSize = cc.winSize;
-
-            cc.BuilderReader.setResourcePath(this._resPath);
-            if (jsb.fileUtils.isFileExist(this._resourceFile)) {
-                readNode = cc.BuilderReader.loadWithController(this._resourceFile, controller, null, parentSize);
-            }
+    createView:function(id,isScene){
+        var root = null;
+        if(isScene){
+            root = new cc.Scene;
+            this.facade.runningScene = root;
         }
-        if (!readNode) {
-            cc.log('[Warn]resourceFile not exist or read error ' + this._resourceFile);
-            readNode = new cc.Node();
-        }
-        LogNodesName(readNode, this._resType);
-        return readNode;
-    }
-};
-
-Component.prototype.update = function(delta) {
-    this._delegate.onUpdate(delta);
-};
-
-Component.prototype.setDelegate = function(delegate) {
-    this._delegate = delegate;
-}
-
-Component.prototype.touchEnabled = function(enable) {
-    if (!enable && this._touchListener) {
-        cc.eventManager.removeListener(this._touchListener);
-        this._touchListener = null;
-        return;
-    }
-
-    this._touchListener = cc.EventListener.create({
-        event: cc.EventListener.TOUCH_ONE_BY_ONE,
-        swallowTouches: true,
-        onTouchBegan: this.onTouchBegan.bind(this),
-        onTouchMoved: this.onTouchMoved.bind(this),
-        onTouchEnded: this.onTouchEnded.bind(this)
-    });
-    cc.eventManager.addListener(this._touchListener, this);
-}
-
-Component.prototype.onTouchBegan = function(touch, event) {
-    cc.log('touchBegan ' + this.NAME)
-    var target = event.getCurrentTarget();
-    var locationInNode = target.convertToNodeSpace(touch.getLocation());
-    if (this._delegate.getOption('canDrag')) {
-        return true;
-    } else if (this._delegate.onTouchBegan) {
-        return this._delegate.onTouchBegan(locationInNode.x, locationInNode.y, target);
-    } else return false;
-}
-
-Component.prototype.onTouchMoved = function(touch, event) {
-    var target = event.getCurrentTarget();
-    var delta = touch.getDelta();
-    cc.log('touchMoved ' + this.NAME + ' x:' + delta.x + ',y:' + delta.y)
-    if (this._delegate.getOption('canDrag')) {
-        this.x += delta.x;
-        this.y += delta.y;
-    }
-    return this._delegate.onTouchMoved && this._delegate.onTouchMoved(delta, target)
-}
-
-Component.prototype.onTouchEnded = function(touch, event) {
-    cc.log('touchEnded ' + this.NAME)
-
-    var target = event.getCurrentTarget();
-    var locationInNode = target.convertToNodeSpace(touch.getLocation());
-    return this._delegate.onTouchEnded && this._delegate.onTouchEnded(locationInNode, target)
-}
-
-Component.prototype.addChild = function(child, order, tag) {
-    if (this._resourceNode != null) {
-        this._resourceNode.addChild(child, order || 0, tag || 0)
-    } else {
-        this._resourceNode = child;
-        cc.Layer.prototype.addChild.call(this, child, order || 0, tag || 0);
-    }
-}
-
-Component.prototype.findChild = function(name, root) {
-    root = root || this._resourceNode
-    var names = name.split('/')
-    for (var i = 0; i < names.length; i++) {
-        root = root.getChildByName(names[i])
-        if (root == null) {
-            cc.log('[Warn] node not find . ' + names[i])
-            return null
-        }
-    }
-    return root
-}
-
-Component.prototype.buttonEvent = function(sender, event) {
-    this._delegate.buttonClick(sender, event);
-}
-Component.prototype.textInputEvent = function(sender, event) {
-    cc.log(sender.name + event)
-}
-Component.prototype.valueChangedEvent = function(sender, event) {
-    cc.log(sender.name + event)
-}
-Component.prototype.checkBoxEvent = function(sender, event) {
-    cc.log(sender.name + event)
-}
-Component.prototype.scrollEvent = function(sender, event) {
-    cc.log(sender.name + event)
-}
-Component.prototype.onPageEvent = function(sender, event) {
-    cc.log(sender.name + event)
-}
-
-Component.prototype.bindEvent = function(root, owner) {
-    owner = owner || this;
-    var children = root.getChildren();
-    for (var i = 0; i < children.length; i++) {
-        if (children[i] instanceof ccui.Button && owner._delegate.buttonClick) {
-            children[i].addTouchEventListener(owner.buttonEvent, owner);
-        } else if (children[i] instanceof ccui.CheckBox && owner._delegate.checkBoxEvent) {
-            children[i].addEventListener(owner.checkBoxEvent, owner)
-        } else if (children[i] instanceof ccui.Slider && owner._delegate.valueChangedEvent) { // || children[i] instanceof ccui.LoadingBar)
-            children[i].addEventListener(owner.valueChangedEvent, owner);
-            children[i].addTouchEventListener(owner.buttonEvent, owner);
-        } else if (children[i] instanceof ccui.TextField && owner._delegate.textInputEvent) {
-            children[i].addTouchEventListener(owner.textInputEvent, owner);
-        } else if (children[i] instanceof ccui.ScrollView) {
-            if (owner._delegate.scrollEvent) {
-                children[i].addEventListener(owner.scrollEvent, owner);
-            }
-            this.bindEvent(children[i], owner);
-        } else if (children[i] instanceof ccui.PageView) {
-            if (owner._delegate.onPageEvent) {
-                children[i].addEventListener(owner.onPageEvent, owner);
-            }
-            this.bindEvent(children[i], owner);
+        var arr = id.split('_');
+        var view = null;
+        var classRef = puremvc.ClassManager[arr[0]];
+        if (!classRef) {
+            cc.log('[Warn]createView: view class not find: ' + arr[0]);
+            view = new ViewBase(arr[0],root);
         } else {
-            this.bindEvent(children[i], owner);
+            view = new classRef(arr[0],root);
+        }
+        this.facade.registerMediator(view);
+
+        var component = this.createComponent(view);        
+        view.setViewComponent(component);
+        return view;
+    },
+    createComponent:function(view){
+        var option = view.getOption();
+        var resourceFile = option.getResourceFile();
+
+        cc.log('resName: ' + resourceFile);
+
+        var parent = option.getParent(this.facade);
+
+        var node = null;
+        var component = null;
+        if(option.resourceType == Const.UI_FILE_TYPE_JSON){
+            node = this.loadCCS(resourceFile,view);
+            component = new CCSComponent(view);
+        } else {
+            var parentSize = parent.getContentSize();
+            node = this.loadCCBI(resourceFile,view,parentSize);
+            component = new CCBComponent(view);
+        }
+        if (!node) {
+            cc.log('[Warn]resourceFile not exist or read error ' + resourceFile);
+            node = new cc.Node();
+        } 
+        LogNodesName(node);
+        component.addChild(node);
+        parent.addChild(component,option.getZOrder(),option.tag);
+        return component;
+    },
+    loadCCBI : function (resourceFile , delegate, parentSize) {
+        if (!parentSize || cc.sizeEqualToSize(parentSize, cc.SizeZero())) {
+            parentSize = cc.winSize;
+        }
+        cc.BuilderReader.setResourcePath(this._resPath);
+        if (jsb.fileUtils.isFileExist(resourceFile)) {
+
+            readNode = cc.BuilderReader.load(resourceFile, delegate, parentSize);
+            var ccbProxy = readNode.controller;
+            for (var k in ccbProxy) {
+                if (typeof(ccbProxy[k]) != 'function') {
+                    delegate[k] = ccbProxy[k];
+                }
+            }
+            var animationManager = readNode.animationManager;
+            var documentCallbackNames = animationManager.getDocumentCallbackNames();
+            var documentCallbackNodes = animationManager.getDocumentCallbackNodes();
+
+            for (var i = 0; i < documentCallbackNames.length; i++) {
+                var callbackName = documentCallbackNames[i];
+                var callbackNode = documentCallbackNodes[i];
+
+                if (delegate[callbackName] === undefined) {
+                    cc.log("Warning: " + callbackName + " is undefined.");
+                } else {
+                    if (callbackNode instanceof cc.ControlButton) {
+                        var documentCallbackControlEvents = animationManager.getDocumentCallbackControlEvents();
+                        var btnEvent = function(sender, evt) {
+                            return delegate[callbackName](sender, evt);
+                        }
+                        callbackNode.addTargetWithActionForControlEvents(delegate, btnEvent, documentCallbackControlEvents[i]);
+                    } else {
+                        callbackNode.setCallback(controller[callbackName], controller);
+                    }
+                }
+            }
+        }
+        
+        return readNode;
+    },
+    loadCCS : function(resourceFile,delegate) {
+    
+        var readObj = ccs.load(this._resPath + resourceFile);
+        var readNode = readObj.node;
+        
+        if(readNode){
+            this.bindEvent(readNode,delegate)   
+        }
+        return readNode; 
+    },   
+    bindEvent : function(root, delegate) {
+        var children = root.getChildren();
+        for (var i = 0; i < children.length; i++) {
+            if (children[i] instanceof ccui.Button && delegate.buttonClick) {
+                children[i].addTouchEventListener(delegate.buttonClick, delegate);
+            } else if (children[i] instanceof ccui.CheckBox && delegate.checkBoxEvent) {
+                children[i].addEventListener(delegate.checkBoxEvent, delegate)
+            } else if (children[i] instanceof ccui.Slider && delegate.valueChangedEvent) { // || children[i] instanceof ccui.LoadingBar)
+                children[i].addEventListener(delegate.valueChangedEvent, delegate);
+                children[i].addTouchEventListener(delegate.buttonClick, delegate);
+            } else if (children[i] instanceof ccui.TextField && delegate.textInputEvent) {
+                children[i].addTouchEventListener(delegate.textInputEvent, delegate);
+            } else if (children[i] instanceof ccui.ScrollView) {
+                if (delegate.scrollEvent) {
+                    children[i].addEventListener(delegate.scrollEvent, delegate);
+                }
+                this.bindEvent(children[i], delegate);
+            } else if (children[i] instanceof ccui.PageView) {
+                if (delegate.onPageEvent) {
+                    children[i].addEventListener(delegate.onPageEvent, delegate);
+                }
+                this.bindEvent(children[i], delegate);
+            } else {
+                this.bindEvent(children[i], delegate);
+            }
         }
     }
 }
-
-
-Component.prototype.getRoot = function() {
-    return this._resourceNode
-}
-
-Component.prototype.getChildByTag = function(tag) {
-    return this._resourceNode.getChildByTag(tag)
-}
-
-Component.prototype.remove = function() {
-    this.touchEnabled(false);
-    this.unschedule();
-    this._resourceNode.removeFromParent()
-    this._resourceNode = null
-}
-
-Component.prototype.onEnterTransitionDidFinish = function() {
-    cc.log(this.NAME + ' onEnterTransitionDidFinish')
-    if (this._delegate.getOption('mode') == ViewBase.MODE_SCENE) {
-        this._delegate._onShowFinish(true)
-    }
-}
-
-Component.prototype.onExit = function() {
-    cc.log('onExit ' + this._resourceFile)
-    // this.unschedule();
-    // cc.eventManager.removeListener(this._touchListener)
-}
-Component.prototype.onExitTransitionDidStart = function() {}
-Component.prototype.onCleanup = function() {}

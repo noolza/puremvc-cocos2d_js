@@ -304,7 +304,7 @@ function GetNodeFindStr(node){
 		if(!parent.getName) break;
         var name = parent.getName();
         if(name == ''){
-            name = TypeofNode(parent) + ' :'+parent.getTag();
+            name = TypeofNode(parent) + ':'+parent.getTag();
         }
 		names.unshift(name);
 		parent = parent.getParent();
@@ -316,21 +316,11 @@ function GetNodeFindStr(node){
 }
 
 function TypeofNode (node) {
-    if(node instanceof cc.SpriteFrame){
-        return 'SpriteFrame';
-    } else if(node instanceof cc.Sprite){
-        return 'Sprite'
-    } else if(node instanceof cc.ControlButton){
-        return 'Button'
-    } else if(node instanceof cc.ScrollView){
-        return 'Scroll'
-    } else if(node instanceof cc.Layer){
-        return 'Layer'
-    } else return 'Node'
+    return node.toString().replace('[object ','').replace(']','');
 }
 function LogNodesName(root) {
     var flag = false;
-    if(root instanceof Component){
+    if(root instanceof CCBComponent){
         cc.log("\n\n****************** [" + root.NAME + "] Nodes Names *****************\n")
         root = root.getRoot();
         flag = true;

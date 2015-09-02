@@ -6,57 +6,29 @@ ViewBase.MODE_TRANSPARENTS = 2;
 ViewBase.MODE_SCENE = 3;
 ViewBase.ZORDER = Const.ZORDER_UI;
 
-ViewBase.prototype.ctor = function(id, parent) {
+ViewBase.prototype.ctor = function(id,parent) {
     this._isShown = false;
     this._notifications = [];
     this._id = id;
-    this.viewOptions = Clone({
-        mode: ViewBase.MODE_NORMAL,
-        autoHideTime: -1,
-        showAction: 'moveFromTop',
-        hideAction: 'moveToBtm',
-        parent: null,
-        zorder: null,
-        initPosition: null,
-        componentName: this._id,
-        componentType: 'ccbi',
-        isAutoRelease: true,
-        isHideOther: true,
-        isClickClose: false,
-        bindUI: null,
-        bindModel: null,
-        canDrag: false,
-    });
-    if (parent) {
-        this.setOption('parent', parent);
+    this.viewOption = new ViewOption();
+    this.setOption('resourceName',id);
+    if(parent){
+        this.setOption('parent',parent);
+    }
+}
+
+ViewBase.prototype.onRegister = function() {
+    this.facade = this.getFacade();
+    if (this.initOption) {
+        this.initOption();
     }
 }
 
 ViewBase.prototype._init = function(isShow) {
     cc.log('ViewInit(' + Array.prototype.join.call(arguments, ',') + ')');
-    this.app = this.getFacade();
-
-    if (this.initOptions) {
-        this.initOptions();
-    }
-
-    this._componentName = this.getOption('componentName');
-
-    if (this._componentName) {
-        var parent = this._getInitParent();
-        var conSize = parent.getContentSize();
-
-        this.viewComponent = new Component(this);
-        Component.createResource(this._componentName + '.' + this.getOption('componentType'), this.viewComponent, conSize);
-        var zorder = this.getOption('zorder')
-        if (zorder == null) {
-            zorder = ViewBase.ZORDER++;
-        }
-        parent.addChild(this.viewComponent, zorder)
-        this._setupViewMode()
-        if (!isShow) {
-            this.viewComponent.setVisible(false);
-        }
+    
+    if (!isShow) {
+        this.viewComponent.setVisible(false);
     }
     cc.log(this.NAME + ' created ');
 
@@ -78,86 +50,77 @@ ViewBase.prototype._init = function(isShow) {
     }
 }
 
-ViewBase.prototype._setupViewMode = function() {
-    var mode = this.getOption('mode')
-    if (mode == ViewBase.MODE_TRANSPARENTS) {
-        this.viewComponent.touchEnabled(false)
-    } else {
-        if (this.onTouchBegan || this.onTouchMoved || this.onTouchEnded || this.getOption('isClickClose') || this.getOption('canDrag')) {
-            this.viewComponent.touchEnabled(true)
-        }
-    }
-    if (this.getOption('showAction') == 'fadeIn' || this.getOption('hideAction') == 'fadeOut') {
-        this.getViewComponent().setCascadeOpacityEnabled(true);
-    }
-}
+// ViewBase.prototype.getInitParent = function() {
+//     var parent = this.getOption('parent')
 
-ViewBase.prototype._getInitParent = function() {
-    var parent = this.getOption('parent')
+//     if (typeof(parent) == 'string') {
+//         var view = this.facade.getView(parent)
+//         if (view != null) {
+//             parent = view.getViewComponent()
+//             if (parent == null) {
+//                 cc.log('[ViewBase] view parent not find ' + this.NAME + ' parentName: ' + parent);
+//                 return null;
+//             }
+//         } else return null
+//     }
 
-    if (typeof(parent) == 'string') {
-        var view = this.app.getView(parent)
-        if (view != null) {
-            parent = view.getViewComponent()
-            if (parent == null) {
-                cc.log('[ViewBase] view parent not find ' + this.NAME + ' parentName: ' + parent);
-                return null;
-            }
-        } else return null
-    }
+//     if (parent == null) {
+//         parent = this.facade.runningScene;
+//     }
+//     return parent
+// }
 
-    if (parent == null) {
-        parent = this.app.runningScene;
-    }
-    return parent
-}
-
-// ViewBase.prototype.onTouchEvent = function(point, event, target) {
-//     if (event == 'began') {
-//         return this.onTouchBegan && this.onTouchBegan(point.x, point.y, target)
-//     } else if (event == 'moved') {
-//         if(this.getOption('canDrag')){
-
-//         }
-//         this.onTouchMoved && this.onTouchMoved(point.x, point.y, target);
+// ViewBase.prototype.setupViewMode = function() {
+//     var mode = this.getOption('mode');
+//     if (mode == ViewBase.MODE_TRANSPARENTS) {
+//         this.viewComponent.touchEnabled(this.getOption('canDrag'));
 //     } else {
-//         this.onTouchEnded && this.onTouchEnded(point.x, point.y, target);
-//         if (this.getOption('isClickClose')) {
-//             this.close()
+//         if (this.onTouchBegan || this.onTouchMoved || this.onTouchEnded || this.getOption('isClickClose') || this.getOption('canDrag')) {
+//             this.viewComponent.touchEnabled(true);
 //         }
+//     }
+//     if (this.getOption('showAction') == 'fadeIn' || this.getOption('hideAction') == 'fadeOut') {
+//         this.viewComponent.setCascadeOpacityEnabled(true);
 //     }
 // }
 
+ViewBase.prototype.needTouch = function() {
+    return this.onTouchBegan || this.onTouchMoved || this.onTouchEnded || this.getOption('isClickClose') || this.getOption('canDrag');
+}
+
 ViewBase.prototype.getOption = function(key) {
-    return this.viewOptions[key]
+    if(!key) {
+        return this.viewOption;
+    }
+    return this.viewOption[key];
 }
 
 ViewBase.prototype.setOption = function(key, value) {
-    this.viewOptions[key] = value;
+    this.viewOption[key] = value;
 }
 
 ViewBase.prototype.show = function() {
     if (this._isShown) {
-        this.onShow()
+        this.onShow();
     } else {
         ViewTransition.execute(this, true, this._onShowFinish)
         this._isShown = true
     }
 }
 
-ViewBase.prototype.onShow = function() {}
-
 ViewBase.prototype.close = function() {
     if (this.autoHideTime) {
         this.autoHideTime = this.getOption('autoHideTime')
     }
     if (this.getOption('isAutoRelease')) {
-        this.getFacade().removeMediator(this.NAME)
+        this.getFacade().removeMediator(this.NAME);
     }
 
     this.onClose && this.onClose()
     ViewTransition.execute(this, false, this._onShowFinish)
 }
+
+ViewBase.prototype.onShow = function() {}
 
 ViewBase.prototype._onShowFinish = function(isShow) {
     cc.log(this.NAME + ' showFinish ' + isShow)
@@ -166,18 +129,18 @@ ViewBase.prototype._onShowFinish = function(isShow) {
         this.onClosed && this.onClosed()
 
         if (this.getOption('isAutoRelease')) {
-            this.viewComponent.remove()
-            this.onRelease && this.onRelease()
+            this.viewComponent.remove();
+            this.onRelease && this.onRelease();
         } else {
-            this.viewComponent.setVisible(false)
+            this.viewComponent.setVisible(false);
         }
     } else {
         if (this.onShown) {
-            this.onShown()
+            this.onShown();
         }
         var bindui = this.getOption('bindUI')
         if (bindui) {
-            this.getFacade().addView(bindui)
+            this.trigger('ShowWindow',[bindui]);
         }
     }
 }
@@ -205,7 +168,7 @@ ViewBase.prototype.getRoot = function() {
 }
 
 ViewBase.prototype.getMediatorName = function() {
-    return this.NAME;
+    return this._id;
 }
 
 ViewBase.prototype.isShown = function() {
@@ -216,6 +179,9 @@ ViewBase.prototype.getChildByName = function(name, root) {
     return this.getViewComponent().findChild(name, root);
 }
 
+ViewBase.prototype.setViewComponent = function(component) {
+    this.viewComponent = component;
+}
 ViewBase.prototype.getViewComponent = function() {
     return this.viewComponent;
 }
@@ -225,20 +191,19 @@ ViewBase.prototype.listen = function(notifierName) {
         if (this._notifications.indexOf(arguments[i]) >= 0) {
             cc.log('[Warn] already listen ' + arguments[i]);
             continue;
-        } else if (this.app) {
-            this.app.registerViewObserver(notifierName, this);
+        } else if (this.facade) {
+            this.facade.registerViewObserver(notifierName, this);
         }
         this._notifications.push(arguments[i])
     }
 }
 
 ViewBase.prototype.trigger = function(notifierName) {
-    this.app.trigger.apply(this.app, arguments);
+    this.facade.trigger.apply(this.facade, arguments);
 }
 
 // override
 
-ViewBase.prototype.onRegister = function() {}
 ViewBase.prototype.listNotificationInterests = function() {
     return this._notifications;
 }

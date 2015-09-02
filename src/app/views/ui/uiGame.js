@@ -1,7 +1,7 @@
 
 var uiGame = Class("uiGame",ViewBase)
 
-uiGame.prototype.initOptions = function(){
+uiGame.prototype.initOption = function(){
 //	this.setOption('isClickClose',true)
 }
 

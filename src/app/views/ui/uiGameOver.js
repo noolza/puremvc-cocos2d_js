@@ -1,7 +1,7 @@
 
 var uiGameOver = Class("uiGameOver",ViewBase)
 
-uiGameOver.prototype.initOptions = function(){
+uiGameOver.prototype.initOption = function(){
 	// this.setOption('showAction','fadeIn');
 	// this.setOption('hideAction','fadeOut');
 }

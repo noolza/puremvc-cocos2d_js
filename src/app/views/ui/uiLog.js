@@ -1,14 +1,14 @@
 
 var uiLog = Class("uiLog",ViewBase)
 
-uiLog.prototype.initOptions = function(){
+uiLog.prototype.initOption = function(){
 	this.setOption('isHideOther',false);
 	this.setOption('mode',ViewBase.MODE_TRANSPARENTS);
-	this.setOption('showAction',null);
-	this.setOption('hideAction',null);
-	this.setOption('canDrag',true);
+	// this.setOption('showAction',null);
+	// this.setOption('hideAction',null);
+	this.setOption('isClickClose',true);
 
-	var rootView = this.app.getView('mainScene');
+	var rootView = this.facade.getView('mainScene');
 	var root = rootView.mNodeRoomList;
 	this.setOption('parent',root);
 }

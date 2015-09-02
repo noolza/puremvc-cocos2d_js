@@ -1,7 +1,7 @@
 
 var uiMain = Class("uiMain",ViewBase)
 
-uiMain.prototype.initOptions = function(){
+uiMain.prototype.initOption = function(){
 //	this.setOption('isClickClose',true)
 }
 

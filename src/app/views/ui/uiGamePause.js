@@ -1,7 +1,7 @@
 
 var uiGamePause = Class("uiGamePause",ViewBase)
 
-uiGamePause.prototype.initOptions = function(){
+uiGamePause.prototype.initOption = function(){
 	this.setOption('isHideOther',false);
 	this.setOption('mode',ViewBase.MODE_MODEL);
 }

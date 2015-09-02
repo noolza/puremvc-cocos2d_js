@@ -20,7 +20,7 @@ MyApp.prototype.run = function() {
     this._registeCommand();
     
     this.trigger('startupCommand');
-    this.trigger('ShowView_mainScene',null,Const.VIEW_TYPE_SCENE);
+    this.trigger('RunScene',['mainScene'],Const.VIEW_TYPE_SCENE);
 }
 
 MyApp.prototype._registeCommand = function() {
@@ -30,10 +30,12 @@ MyApp.prototype._registeCommand = function() {
             this.registerCommand(key,classMgr[key]);
             cc.log('registerCommand:'+key);
         } else if(classMgr[key].super == ViewBase){
-            this.registerCommand('ShowView_'+key,showWindowCommand);
-            cc.log('registerViewCommand:'+key);
+            // this.registerCommand('ShowView_'+key,showWindowCommand);
+            //cc.log('registerViewCommand:'+key);
         }
     }
+    this.registerCommand('ShowWindow',ShowViewCommand);
+    this.registerCommand('RunScene',ShowViewCommand);
 }
 
 MyApp.prototype.registerViewObserver = function(notifierName,view){
@@ -86,24 +88,9 @@ MyApp.prototype.showView = function(isScene,id) {
         throw new Error('[Error]createView arguments[1] is not string or ViewBase');
     }
 
-    if (view == null) {
-        var root = null;
-        if (isScene) {
-        	root = new cc.Scene();
-            this.runningScene = root;
-        }
-        var arr = id.split('_');
-        var classRef = puremvc.ClassManager[arr[0]];
-        
-        if (!classRef) {
-            cc.log('[Warn]createView: view class not find: ' + arr[0]);
-            view = new ViewBase(arr[0],root);
-        } else {
-        	view = new classRef(arr[0],root);
-        }
-
-        this.registerMediator(view);
-        view._init.apply(view, args);
+    if (view == null) {                       
+        view = UIFactory.createView(id,isScene);
+        view._init.apply(view,args);
     }
 
     if (isShow) {
@@ -116,9 +103,9 @@ MyApp.prototype.showView = function(isScene,id) {
                     this.currentView = null;
                 }
             }
-            if(view.getOption('mode') === ViewBase.UIMODE_NORMAL){
+            if(view.getOption().isNormal()){
                 this.currentView = view;
-                cc.log('currentView: '+view.NAME)
+                cc.log('currentView: '+view.NAME);
             }
         }
     }

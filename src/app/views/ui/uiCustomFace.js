@@ -1,7 +1,7 @@
 
 var uiCustomFace = Class("uiCustomFace",ViewBase)
 
-uiCustomFace.prototype.initOptions = function(){
+uiCustomFace.prototype.initOption = function(){
 //	this.setOption('isClickClose',true)
 }
 

@@ -1,6 +1,6 @@
 var mainScene = Class("mainScene", ViewBase)
 
-mainScene.prototype.initOptions = function() {
+mainScene.prototype.initOption = function() {
     this.setOption('mode', ViewBase.MODE_SCENE)
     this.setOption('isHideOther', false)
     this.setOption('showAction', 'sceneFade')
@@ -43,9 +43,9 @@ mainScene.prototype.onTouchBegan = function(x, y) {
     cc.log("onTouchBegan. ", x, y)
     return true
 }
-mainScene.prototype.onTouchMoved = function(x, y) {
-    cc.log("onTouchMoved. ", x, y)
-}
-mainScene.prototype.onTouchEnded = function(x, y) {
-    cc.log("onTouchEnded. ", x, y)
-}
+// mainScene.prototype.onTouchMoved = function(x, y) {
+//     cc.log("onTouchMoved. ", x, y)
+// }
+// mainScene.prototype.onTouchEnded = function(x, y) {
+//     cc.log("onTouchEnded. ", x, y)
+// }
