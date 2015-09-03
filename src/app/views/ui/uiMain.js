@@ -3,6 +3,8 @@ var uiMain = Class("uiMain",ViewBase)
 
 uiMain.prototype.initOption = function(){
 	this.setOption('resourceType','json');
+	this.setOption('isHideOther',false);
+	this.setOption('touchMode',ViewOption.TOUCH_NONE);
 }
 
 uiMain.prototype.onCreate = function(  ){

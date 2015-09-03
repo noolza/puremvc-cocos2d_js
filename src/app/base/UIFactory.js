@@ -1,10 +1,6 @@
 
 var UIFactory = {
     // resPath : must end with '/'
-    searchPaths : {
-        'json':'res/sd_other/',
-        'ccbi':'res/'
-    },
     init: function(facade) {
         this.facade = facade;
         cc.BuilderReader.registerController('CCBProxy', {});
@@ -40,12 +36,13 @@ var UIFactory = {
 
         var node = null;
         var component = null;
+
         if(option.resourceType == Const.UI_FILE_TYPE_JSON){
-            node = this.loadCCS(this.searchPaths[option.resourceType] + resourceFile,view);
+            node = this.loadCCS(Const.UI_FILE_JSON_PATH + resourceFile,view);
             component = new CCSComponent(view);
         } else {
             var parentSize = parent.getContentSize();
-            cc.BuilderReader.setResourcePath(this.searchPaths[option.resourceType]);
+            cc.BuilderReader.setResourcePath(Const.UI_FILE_CCBI_PATH);
             node = this.loadCCBI(resourceFile,view,parentSize);
             component = new CCBComponent(view);
         }

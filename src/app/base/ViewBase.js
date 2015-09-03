@@ -76,14 +76,18 @@ ViewBase.prototype.show = function() {
 
 ViewBase.prototype.close = function() {
     if (this.autoHideTime) {
-        this.autoHideTime = this.getOption('autoHideTime')
+        this.autoHideTime = this.getOption('autoHideTime');
     }
     if (this.getOption('isAutoRelease')) {
         this.getFacade().removeMediator(this.NAME);
     }
 
-    this.onClose && this.onClose()
-    ViewTransition.execute(this, false, this._onShowFinish)
+    this.onClose && this.onClose();
+    ViewTransition.execute(this, false, this._onShowFinish);
+    var bindUI = this.getOption('bindUI');
+    if(bindUI){
+        this.trigger('HideWindow',[bindUI]);
+    }
 }
 
 ViewBase.prototype.onShow = function() {}
@@ -104,7 +108,7 @@ ViewBase.prototype._onShowFinish = function(isShow) {
         if (this.onShown) {
             this.onShown();
         }
-        var bindui = this.getOption('bindUI')
+        var bindui = this.getOption('bindUI');
         if (bindui) {
             this.trigger('ShowWindow',[bindui]);
         }
@@ -148,20 +152,21 @@ ViewBase.prototype.getChildByName = function(name, root) {
 ViewBase.prototype.setViewComponent = function(component) {
     this.viewComponent = component;
 }
+
 ViewBase.prototype.getViewComponent = function() {
     return this.viewComponent;
 }
 
 ViewBase.prototype.listen = function(notifierName) {
-    for (var i = 0; i < arguments.length; i++) {
-        if (this._notifications.indexOf(arguments[i]) >= 0) {
-            cc.log('[Warn] already listen ' + arguments[i]);
-            continue;
-        } else if (this.facade) {
-            this.facade.registerViewObserver(notifierName, this);
-        }
-        this._notifications.push(arguments[i])
+    
+    if (this._notifications.indexOf(notifierName) >= 0) {
+        cc.log('[Warn] already listen ' + notifierName);
+        return;
+    } else if (this.facade) {
+        this.facade.registerViewObserver(notifierName, this);
+        this._notifications.push(notifierName)
     }
+
 }
 
 ViewBase.prototype.trigger = function(notifierName) {

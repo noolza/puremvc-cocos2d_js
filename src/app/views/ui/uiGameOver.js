@@ -4,6 +4,8 @@ var uiGameOver = Class("uiGameOver",ViewBase)
 uiGameOver.prototype.initOption = function(){
 	// this.setOption('showAction','fadeIn');
 	// this.setOption('hideAction','fadeOut');
+	this.setOption('resourceType','json')
+	
 }
 
 uiGameOver.prototype.onCreate = function(score){

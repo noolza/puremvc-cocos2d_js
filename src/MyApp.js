@@ -20,7 +20,7 @@ MyApp.prototype.run = function() {
     this._registeCommand();
     
     this.trigger('startupCommand');
-    this.trigger('RunScene',['mainScene'],Const.VIEW_TYPE_SCENE);
+    this.trigger('RunScene',['mainScene']);
 }
 
 MyApp.prototype._registeCommand = function() {
@@ -35,6 +35,7 @@ MyApp.prototype._registeCommand = function() {
         }
     }
     this.registerCommand('ShowWindow',ShowViewCommand);
+    this.registerCommand('HideWindow',ShowViewCommand);
     this.registerCommand('RunScene',ShowViewCommand);
 }
 

@@ -3,10 +3,11 @@ var uiLog = Class("uiLog",ViewBase)
 
 uiLog.prototype.initOption = function(){
 	this.setOption('isHideOther',false);
-	this.setOption('mode',ViewBase.MODE_TRANSPARENTS);
 	// this.setOption('showAction',null);
 	// this.setOption('hideAction',null);
 	this.setOption('isClickClose',true);
+    this.setOption('bindUI', 'uiMain');
+	
 
 	var rootView = this.facade.getView('mainScene');
 	var root = rootView.mNodeRoomList;

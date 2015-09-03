@@ -143,7 +143,7 @@ uiGame.prototype.die = function(){
 	var spawn = cc.Spawn.create(moveTo,cc.RotateBy.create(2,90),cc.FadeTo.create(2,0));
 	var self = this;
 	this.sperm.runAction(cc.Sequence.create(spawn,cc.CallFunc.create(function(){
-		self.app.addView('uiGameOver',self.score);
+		self.facade.trigger('ShowWindow',['uiGameOver',self.score]);
 	})));
 	this.tail.stopAllActions();
 	this.tail.setRotation(0);

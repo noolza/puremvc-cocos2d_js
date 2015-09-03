@@ -16,11 +16,12 @@ var Component = cc.Layer.extend({
 	}
 })
 Component.extend = cc.Class.extend;
+
 Component.prototype.setupMode = function() {
     var option = this._delegate.getOption();
     var mode = option.mode;
-    if (option.isTransparent()) {
-        this.touchEnabled(option.canDrag);
+    if (option.touchMode == ViewOption.TOUCH_NONE) {
+        this.touchEnabled(false);
     } else {
         if (this._delegate.needTouch()) {
             this.touchEnabled(true);
@@ -39,6 +40,8 @@ Component.prototype.getDelegate = function(delegate) {
 
 Component.prototype.setDelegate = function(delegate) {
     this._delegate = delegate;
+    this.viewOption = delegate.getOption();
+    this.NAME = delegate.NAME;
 }
 
 Component.prototype.touchEnabled = function(enable) {
@@ -59,7 +62,7 @@ Component.prototype.touchEnabled = function(enable) {
 }
 
 Component.prototype.onTouchBegan = function(touch, event) {
-    cc.log('touchMoved ' + this.NAME)
+    cc.log('onTouchBegan ' + this.NAME)
     throw new Error('must override this function');
 }
 

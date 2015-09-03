@@ -7,7 +7,14 @@ ShowViewCommand.prototype.execute = function(notification){
     if(!viewId || typeof(viewId) != 'string') {
         throw new Error('first params is wrong '+name);
     }
-    var viewType = notification.getType();
-    params.unshift(viewType == Const.VIEW_TYPE_SCENE);
-	this.facade.showView.apply(this.facade,params);
+    if(name == 'HideWindow'){
+    	var view = this.facade.getView(viewId);
+    	if(view){
+    		view.close();
+    	}
+    } else {
+    	var isScene = name == 'RunScene';
+	    params.unshift(isScene);
+		this.facade.showView.apply(this.facade,params);
+    }  
 }

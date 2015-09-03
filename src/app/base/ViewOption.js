@@ -1,6 +1,7 @@
 var ViewOption = function() {
 
-    this.mode          = ViewBase.MODE_NORMAL;
+    this.mode          = ViewOption.MODE_NORMAL;
+    this.touchMode     = ViewOption.TOUCH_SCREEN;
     this.autoHideTime  = -1;
     this.showAction    = 'moveFromTop';
     this.hideAction    = 'moveToBtm';
@@ -47,20 +48,19 @@ ViewOption.prototype.isNormal = function(){
 	return this.mode == ViewOption.MODE_NORMAL;
 }
 
-ViewOption.prototype.isModel = function(){
-	return this.mode == ViewOption.MODE_MODEL;
-}
-
-ViewOption.prototype.isTransparent = function(){
-	return this.mode == ViewOption.MODE_TRANSPARENT;
+ViewOption.prototype.isFloat = function(){
+	return this.mode == ViewOption.MODE_FLOAT;
 }
 
 ViewOption.prototype.getZOrder = function(){
 	return this.zorder || ViewOption.ZORDER++;
 }
 
-ViewOption.MODE_NORMAL       = 0;
-ViewOption.MODE_MODEL        = 1;
-ViewOption.MODE_TRANSPARENT  = 2;
-ViewOption.MODE_SCENE        = 3;
-ViewOption.ZORDER            = Const.ZORDER_UI;
+ViewOption.MODE_NORMAL  = 0;
+ViewOption.MODE_FLOAT   = 1;
+ViewOption.MODE_SCENE   = 3;
+
+ViewOption.TOUCH_WINDOW = 0;
+ViewOption.TOUCH_SCREEN = 1;
+ViewOption.TOUCH_NONE   = 2;
+ViewOption.ZORDER       = Const.ZORDER_UI;
