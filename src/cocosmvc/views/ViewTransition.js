@@ -8,7 +8,7 @@ ViewTransition.moveFromBtm = function(node,callback){
 
 ViewTransition.moveFromTop = function(node,callback){
     node.setVisible(true);
-    node.setPosition(0,cc.winSize.height)
+    node.setPosition(0,cc.winSize.height);
     return cc.moveTo(0.5,cc.p(0,0));
 }
 
@@ -34,6 +34,12 @@ ViewTransition.sceneFade = function(node,opts){
 
 ViewTransition.execute = function(view,isShow,callback){
 	var actKey = isShow ? 'showAction' : 'hideAction'
+    var actionName = view.getOption(actKey);
+    if(view.getOption().isScene() && actionName.indexOf('scene')<0){
+        cc.warn('scene is assign a error action :'+actionName);
+        cc.director.runScene(view.getViewComponent().getParent());
+        return
+    } 
     var actionFunc = ViewTransition[view.getOption(actKey)]
     if(actionFunc == null){
         return callback.call(view,isShow);

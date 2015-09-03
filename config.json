@@ -1,6 +1,6 @@
 {
     "init_cfg": {
-        "isLandscape": false,
+        "isLandscape": true,
         "isWindowTop": false,
         "name": "cocos_puremvc",
         "width": 960,

@@ -2,7 +2,7 @@ var mainScene = Class("mainScene", ViewBase)
 
 mainScene.prototype.initOption = function() {
     this.setOption('mode', ViewOption.MODE_SCENE)
-    this.setOption('showAction', 'sceneFade')
+    // this.setOption('showAction', 'sceneFade')
     // this.setOption('bindUI', 'uiLog')
 }
 
