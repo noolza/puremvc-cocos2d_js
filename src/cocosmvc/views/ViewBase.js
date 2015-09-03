@@ -1,10 +1,4 @@
-var ViewBase = Class("ViewBase", puremvc.Notifier)
-
-ViewBase.MODE_NORMAL = 0;
-ViewBase.MODE_MODEL = 1;
-ViewBase.MODE_TRANSPARENTS = 2;
-ViewBase.MODE_SCENE = 3;
-ViewBase.ZORDER = Const.ZORDER_UI;
+var ViewBase = Class("ViewBase", puremvc.Notifier);
 
 ViewBase.prototype.ctor = function(id,parent) {
     this._isShown = false;
@@ -45,7 +39,7 @@ ViewBase.prototype._init = function(isShow) {
         }
         for (var i = 0; i < bindModel.length; i++) {
             this.listen(bindModel[i])
-            this.getFacade().getData(bindModel[i])
+            this.getFacade().getData(bindModel[i]);
         }
     }
 }

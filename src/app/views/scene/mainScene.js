@@ -3,13 +3,11 @@ var mainScene = Class("mainScene", ViewBase)
 mainScene.prototype.initOption = function() {
     this.setOption('mode', ViewBase.MODE_SCENE)
     this.setOption('showAction', 'sceneFade')
-    this.setOption('bindUI', 'uiLog')
+    // this.setOption('bindUI', 'uiLog')
 }
 
 mainScene.prototype.onCreate = function() {
     this.randomColor();
-
-    // this.particle.setPosition(cc.winSize.width/2, -5);
     this.delay = 0;
 }
 
