@@ -51,8 +51,9 @@ var UIFactory = {
             node = new cc.Node();
         } 
 
-        LogNodesName(node);
         component.addChild(node);
+        LogNodesName(component);
+        
         parent.addChild(component,option.getZOrder(),option.tag);
         return component;
     },
@@ -60,6 +61,7 @@ var UIFactory = {
         if (!parentSize || cc.sizeEqualToSize(parentSize, cc.SizeZero())) {
             parentSize = cc.winSize;
         }
+        var readNode = null;
         if (jsb.fileUtils.isFileExist(resourceFile)) {
 
             readNode = cc.BuilderReader.load(resourceFile, delegate, parentSize);

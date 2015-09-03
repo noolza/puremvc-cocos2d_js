@@ -1,10 +1,9 @@
 {
 	"searchPaths":[
-		"res/common/img",
-		"res/hall/img",
-		"res/hall/ccbi",
-		"res/hall/font",
-		"res/hall/nopack"
-	],
-	"viewType":"ccbi"
+		"res/myApp/img",
+		"res/myApp/ccs",
+		"res/myApp/ccbi",
+		"res/myApp/font",
+		"res/myApp/sound"
+	]
 }

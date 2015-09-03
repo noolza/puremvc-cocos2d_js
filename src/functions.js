@@ -320,7 +320,7 @@ function TypeofNode (node) {
 }
 function LogNodesName(root) {
     var flag = false;
-    if(root instanceof CCBComponent){
+    if(root instanceof Component){
         cc.log("\n\n****************** [" + root.NAME + "] Nodes Names *****************\n")
         root = root.getRoot();
         flag = true;
