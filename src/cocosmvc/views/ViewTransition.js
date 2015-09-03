@@ -38,7 +38,7 @@ ViewTransition.execute = function(view,isShow,callback){
     if(view.getOption().isScene() && actionName.indexOf('scene')<0){
         cc.warn('scene is assign a error action :'+actionName);
         cc.director.runScene(view.getViewComponent().getParent());
-        return
+        return;
     } 
     var actionFunc = ViewTransition[view.getOption(actKey)]
     if(actionFunc == null){
