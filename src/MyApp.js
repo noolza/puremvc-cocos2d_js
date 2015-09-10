@@ -29,9 +29,6 @@ MyApp.prototype._registeCommand = function() {
         if(classMgr[key].super == puremvc.SimpleCommand){
             this.registerCommand(key,classMgr[key]);
             cc.log('registerCommand:'+key);
-        } else if(classMgr[key].super == ViewBase){
-            // this.registerCommand('ShowView_'+key,showWindowCommand);
-            //cc.log('registerViewCommand:'+key);
         }
     }
     this.registerCommand('ShowWindow',ShowViewCommand);
@@ -64,9 +61,12 @@ MyApp.prototype.getData = function(dataName) {
     if (proxy == null) {
     	var classRef = puremvc.ClassManager[dataName];
     	if(classRef){
-    		proxy = new classRef();
+    		proxy = new classRef(dataName);
     		this.registerProxy(proxy);
     	}
+    }
+    if(!proxy){
+        throw new Error('DataProxy is undefined: '+bindModel[i])
     }
     return proxy;
 }

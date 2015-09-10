@@ -1,9 +1,13 @@
 {
 	"searchPaths":[
-		"res/myApp/img",
-		"res/myApp/ccs",
-		"res/myApp/ccbi",
-		"res/myApp/font",
-		"res/myApp/sound"
+		"res/cn/img",
+		"res/cn/ccs",
+		"res/cn/ccbi",
+		"res/cn/font",
+		"res/cn/sound"
+	],
+	"res" : [
+	    "res/cn/img/HelloWorld.png",
+	    "res/cn/ccs/mainScene.json"
 	]
 }

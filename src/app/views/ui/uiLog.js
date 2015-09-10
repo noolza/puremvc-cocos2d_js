@@ -5,28 +5,27 @@ uiLog.prototype.initOption = function(){
 	this.setOption('isHideOther',false);
 	// this.setOption('showAction',null);
 	// this.setOption('hideAction',null);
-	this.setOption('isClickClose',true);
-    this.setOption('bindUI', 'uiMain');
-	
-
-	var rootView = this.facade.getView('mainScene');
-	var root = rootView.mNodeRoomList;
-	this.setOption('parent',root);
+	// this.setOption('isClickClose',true);
+	this.setOption('bindModel','testData');
+    // this.setOption('bindUI', 'uiMain');
+	// var rootView = this.facade.getView('mainScene');
+	// var root = rootView.mNodeRoomList;
+	// this.setOption('parent',root);
 }
 
 uiLog.prototype.onCreate = function(){
-	var scaleSprite = cc.Scale9Sprite.createWithSpriteFrameName('btn_ad_normal.png');
-    var editBox = cc.EditBox.create(cc.size(200,40), scaleSprite);
-    editBox.x+= 100;
-    editBox.y+= 20;
-    editBox.setDelegate(this);
-	this.toolRoot.addChild(editBox);
-	this.listen('log');
-	this.logs = [];
+	// var scaleSprite = cc.Scale9Sprite.createWithSpriteFrameName('btn_ad_normal.png');
+ //    var editBox = cc.EditBox.create(cc.size(200,40), scaleSprite);
+ //    editBox.x+= 100;
+ //    editBox.y+= 20;
+ //    editBox.setDelegate(this);
+	// this.toolRoot.addChild(editBox);
+	// this.listen('log');
+	// this.logs = [];
 
-	this.lblRoot = cc.Node.create();
-	this.mScroll.addChild(this.lblRoot);
-	this.posY = 0;
+	// this.lblRoot = cc.Node.create();
+	// this.mScroll.addChild(this.lblRoot);
+	// this.posY = 0;
 }
 
 uiLog.prototype.fresh = function(){
@@ -37,7 +36,7 @@ uiLog.prototype.fresh = function(){
 
 uiLog.prototype.onShown = function(){
 	cc.log('uiLog onShown')
-    this.trigger('log','test','log');	
+    // this.trigger('log','test','log');	
 }
 
 uiLog.prototype.onClose = function(){
@@ -78,22 +77,27 @@ uiLog.prototype.editBoxReturn = function (sender) {
 }
 
 ViewBase.prototype.handleNotification = function(notification){ 
-	var type = notification.getType();
-	var color = cc.color.WHITE;
-	if(type == 'warn'){
-		color = cc.color.ORANGE;
-	}
-	if(type == 'error'){
-		color = cc.color.RED;
-	}
-	this.logs.push(notification.getBody());
-	var lbl = cc.LabelTTF.create(notification.getBody(),'Arial',18);
-	lbl.setAnchorPoint(cc.p(0,1));
-	lbl.setColor(color);
-	this.lblRoot.addChild(lbl);
-	lbl.y = this.posY;
-	this.posY -= lbl.height;
-	this.lblRoot.y = -this.posY;
-	// this.lblRoot.height = -this.posY;
-	this.mScroll.setContentSize(cc.size(this.mScroll.width,-this.posY))
+	// var type = notification.getType();
+	// var color = cc.color.WHITE;
+	// if(type == 'warn'){
+	// 	color = cc.color.ORANGE;
+	// }
+	// if(type == 'error'){
+	// 	color = cc.color.RED;
+	// }
+	// this.logs.push(notification.getBody());
+	// var lbl = cc.LabelTTF.create(notification.getBody(),'Arial',18);
+	// lbl.setAnchorPoint(cc.p(0,1));
+	// lbl.setColor(color);
+	// this.lblRoot.addChild(lbl);
+	// lbl.y = this.posY;
+	// this.posY -= lbl.height;
+	// this.lblRoot.y = -this.posY;
+	// // this.lblRoot.height = -this.posY;
+	// this.mScroll.setContentSize(cc.size(this.mScroll.width,-this.posY))
+	cc.log(notification.getBody().key);
+	var lbl = cc.LabelTTF.create(notification.getBody().key,'Arial',18);
+	this.addChild(lbl);
+	lbl.x =10;
+	lbl.y = 100
 }

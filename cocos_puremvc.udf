@@ -1,4 +1,4 @@
-<UserData Version="2.3.1.2">
+<UserData Version="2.3.2.0">
   <Properties>
     <Item Key="CocosRecentOperation">
       <Value ctype="CocosRecentOperation">
@@ -26,14 +26,6 @@
         <KeystoreAliasPassword Value="" />
         <EnableSourceMap Value="False" />
         <EnableHTML5Advanced Value="False" />
-      </Value>
-    </Item>
-    <Item Key="TabsParamsKey">
-      <Value ctype="TabsInfo">
-        <OpenedDocuments>
-          <FilePathData Path="mainScene.csd" />
-        </OpenedDocuments>
-        <ActiveDocument Path="mainScene.csd" />
       </Value>
     </Item>
   </Properties>

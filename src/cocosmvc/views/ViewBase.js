@@ -38,8 +38,11 @@ ViewBase.prototype._init = function(isShow) {
             bindModel = [bindModel]
         }
         for (var i = 0; i < bindModel.length; i++) {
-            this.listen(bindModel[i])
-            this.getFacade().getData(bindModel[i]);
+            if(!puremvc.ClassManager[bindModel[i]]){
+                throw new Error('DataProxy is undefined: '+bindModel[i])
+            }
+            this.listen(bindModel[i]);
+            this.facade.getData(bindModel[i]);
         }
     }
 }

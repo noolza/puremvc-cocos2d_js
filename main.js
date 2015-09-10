@@ -62,7 +62,7 @@ cc.game.onStart = function(){
     cc.view.setDesignResolutionSize(960, 640, cc.ResolutionPolicy.SHOW_ALL);
     cc.view.resizeWithBrowserSize(true);
     //load resources
-    cc.LoaderScene.preload(g_resources, function () {
+    cc.LoaderScene.preload(cfg.res, function () {
 //        cc.director.runScene(new HelloWorldScene());
           MyApp.getInstance(0).run();
     }, this);

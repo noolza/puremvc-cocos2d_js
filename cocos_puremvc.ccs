@@ -1,5 +1,5 @@
 <Solution>
-  <PropertyGroup Name="cocos_puremvc" Version="2.3.1.2" Type="CocosStudio" />
+  <PropertyGroup Name="cocos_puremvc" Version="2.3.2.0" Type="CocosStudio" />
   <SolutionFolder>
     <Group ctype="ResourceGroup">
       <RootFolder Name=".">

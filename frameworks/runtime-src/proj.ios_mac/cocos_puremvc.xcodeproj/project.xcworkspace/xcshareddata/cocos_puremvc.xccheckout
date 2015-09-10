@@ -7,14 +7,14 @@
 	<key>IDESourceControlProjectIdentifier</key>
 	<string>026EBFAF-868E-4064-AE26-8597EE207FAC</string>
 	<key>IDESourceControlProjectName</key>
-	<string>project</string>
+	<string>cocos_puremvc</string>
 	<key>IDESourceControlProjectOriginsDictionary</key>
 	<dict>
 		<key>74FF909F1579C2EFE7A860BDA0E781C6CC0D7C9B</key>
 		<string>github.com:noolza/puremvc-cocos2d_js.git</string>
 	</dict>
 	<key>IDESourceControlProjectPath</key>
-	<string>frameworks/runtime-src/proj.ios_mac/cocos_puremvc.xcodeproj/project.xcworkspace</string>
+	<string>frameworks/runtime-src/proj.ios_mac/cocos_puremvc.xcodeproj</string>
 	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
 	<dict>
 		<key>74FF909F1579C2EFE7A860BDA0E781C6CC0D7C9B</key>
