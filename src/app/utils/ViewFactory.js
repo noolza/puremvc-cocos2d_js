@@ -47,10 +47,12 @@ var ViewFactory = {
             component = new CCBComponent(view);
         }
         if (!node) {
-            cc.log('[Warn]resourceFile not exist or read error ' + resourceFile);
+            cc.warn('[createComponent]resourceFile not exist or read error ' + resourceFile);
             node = new cc.Node();
         } 
 
+        node.setAnchorPoint(cc.p(0.5,0.5));
+        node.setPosition(cc.p(cc.winSize.width/2,cc.winSize.height/2));
         component.addChild(node);
         LogNodesName(component);
         

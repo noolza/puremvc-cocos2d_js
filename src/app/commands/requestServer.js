@@ -3,9 +3,10 @@ var requestServer = Class('C_RequestServer', puremvc.SimpleCommand);
  * [execute description]
  * @Author lihuiqun
  * @Time   2015-10-05T09:52:41+0800
- * @Disc   trigger('CMD_RequestServer','NET_login','uname','pwd',callback)
- * 		   trigger('CMD_RequestServer',protocol,callback)
- * 		   sendNotification('CMD_RequestServer',protocol,callback)
+ * @Disc   trigger('C_RequestServer','NET_login','uname','pwd',callback)
+ * 		   trigger('C_RequestServer',protocol,callback)
+ * 		   sendNotification('C_RequestServer',protocol,callback)
+ * 		   sendNotification('C_RequestServer','NET_login',callback)
  * @param  {[Notification]}
  */
 requestServer.prototype.execute = function(notification) {
@@ -22,20 +23,19 @@ requestServer.prototype.execute = function(notification) {
     	} else if(typeof(body[0] == 'string')){
     		protocol = this.getProtocol.apply(this, body);
     	} else {
-    		throw new Error('[CMD_RequestServer] arguments error')
+    		throw new Error('[CMD_RequestServer] arguments error');
     	}
 
     } else if(typeof(body.method) == 'string'){
     	protocol = body;
     	callback = notification.getType();
     } else if(typeof(body) == 'string'){
-    	protocol = this.getProtocol.apply(this, body);
+    	protocol = this.getProtocol(body);
     	callback = notification.getType();
     }
     
-    var protocol = this.getProtocol.apply(this, body);
     this.httpRequest(protocol, callback);
-}
+};
 
 requestServer.prototype.getProtocol = function(method, arg_) {
     var cfg = ProtocolConfig[method];

@@ -1,17 +1,13 @@
 {
 	"searchPaths":[
 		"res/cn/img",
-		"res/cn/ccs",
+		"res/cn/json",
 		"res/cn/ccbi",
 		"res/cn/font",
 		"res/cn/sound"
 	],
 	"res" : [
 	    "res/cn/img/HelloWorld.png",
-	    "res/cn/img/hall_animation.plist",
-	    "res/cn/img/hall_animation.png",
-	    "res/cn/ccs/mainScene.json",
-	    "res/cn/img/texiao_junei_chuopoqipao.png",
-	    "res/cn/img/texiao_junei_chuopoqipao.plist"
+	    "res/cn/ccs/mainScene.json"
 	]
 }

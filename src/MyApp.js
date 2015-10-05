@@ -45,6 +45,9 @@ MyApp.prototype.trigger = function (notifierName) {
         throw new Error('[MyApp.trigger] command not find :' + notifierName);
     }
     var args = Array.prototype.slice.call(arguments,1);
+    if(args.length == 1){
+        args = args[0];
+    }
     this.sendNotification(notifierName,args,null);
 };
 
@@ -115,8 +118,9 @@ MyApp.prototype.showView = function(isScene,id) {
         if(!isScene){
             if(view.getOption('isHideOther')){
                 if(this.currentView){
-                    this.currentView.close();
-                    this.currentView = null;
+                    // this.currentView.close();
+                    // this.currentView = null;
+                    this.trigger('MSG_HideOtherView',view);
                 }
             }
             if(view.getOption().isNormal()){

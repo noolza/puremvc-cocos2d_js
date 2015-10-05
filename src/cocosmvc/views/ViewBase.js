@@ -2,7 +2,7 @@ var ViewBase = Class("ViewBase", puremvc.Notifier);
 
 ViewBase.prototype.ctor = function(id,parent) {
     this._isShown = false;
-    this._notifications = [];
+    this._notifications = ['MSG_HideOtherView'];
     this._id = id;
     this.viewOption = new ViewOption();
     this.setOption('resourceName',id);
@@ -33,6 +33,9 @@ ViewBase.prototype._init = function(isShow) {
 };
 
 ViewBase.prototype.needTouch = function() {
+    if(this.getOption('touchMode') == ViewOption.TOUCH_NONE){
+        return false;
+    }
     return this.onTouchBegan || this.onTouchMoved || this.onTouchEnded || this.getOption('isClickClose') || this.getOption('canDrag');
 };
 
@@ -137,11 +140,15 @@ ViewBase.prototype.isShown = function() {
 };
 
 ViewBase.prototype.isScene = function() {
-    return this.viewOption.isScene;
+    return this.viewOption.isScene();
 };
 
 ViewBase.prototype.getChildByName = function(name, root) {
     return this.getViewComponent().findChild(name, root);
+};
+
+ViewBase.prototype.getChildByTag = function(tag, root) {
+    return this.getViewComponent().getChildByTag(tag, root);
 };
 
 ViewBase.prototype.setViewComponent = function(component) {
@@ -168,15 +175,20 @@ ViewBase.prototype.trigger = function(notifierName) {
     this.facade.trigger.apply(this.facade, arguments);
 };
 
-// override
-
 ViewBase.prototype.listNotificationInterests = function() {
     return this._notifications;
 };
 
+ViewBase.prototype.handleNotification = function(notification){ 
+    if(notification.getName() == 'MSG_HideOtherView' && this != notification.getBody() && this.viewOption.isNormal()){
+        this.close();
+    }
+    this.onMessage && this.onMessage(notification);
+};
 //onRemoveMediator
 ViewBase.prototype.onRemove = function() {};
 
+// override
 // ViewBase.prototype.onCreate = function(){ }
 // ViewBase.prototype.onClose = function(){ }
-// ViewBase.prototype.handleNotification = function(notification){ }
+// ViewBase.prototype.onMessage = function(notification){};

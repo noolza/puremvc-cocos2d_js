@@ -35,6 +35,9 @@ ViewOption.prototype.isFloat = function(){
 };
 
 ViewOption.prototype.getZOrder = function(){
+    if(this.isScene()){
+        return 0;
+    }
 	return this.zorder || ViewOption.ZORDER++;
 };
 
@@ -45,4 +48,4 @@ ViewOption.MODE_SCENE   = 3;
 ViewOption.TOUCH_WINDOW = 0;
 ViewOption.TOUCH_SCREEN = 1;
 ViewOption.TOUCH_NONE   = 2;
-ViewOption.ZORDER       = Const.ZORDER_UI;
+ViewOption.ZORDER       = 1000;

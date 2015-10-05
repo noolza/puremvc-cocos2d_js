@@ -2,7 +2,7 @@ var CCSComponent = Component.extend({
     // ctor: function(delegate) {
     //     this._super(delegate);
     // }
-})
+});
 
 CCSComponent.prototype.onTouchBegan = function(touch, event) {
     var target = event.getCurrentTarget();
@@ -11,7 +11,7 @@ CCSComponent.prototype.onTouchBegan = function(touch, event) {
 
     var delegate = this.getDelegate();
     var option = delegate.getOption();
-
+    cc.log('onTouchBegan:' + this.NAME);
     if (option.canDrag) {
         var titleRect = cc.rect(rootRect.x, rootRect.y + rootRect.height - 40, rootRect.width, 40);
         if (cc.rectContainsPoint(titleRect, locationInNode)) {
@@ -31,7 +31,10 @@ CCSComponent.prototype.onTouchBegan = function(touch, event) {
         if(pointIn){
             delegate.onTouchBegan && delegate.onTouchBegan(locationInNode.x, locationInNode.y, target);
             return true;
-        } else return false;
+        } else {
+            cc.log('point out');
+            return false;
+        }
     } else if(touchMode == ViewOption.TOUCH_SCREEN){
         delegate.onTouchBegan && delegate.onTouchBegan(locationInNode.x, locationInNode.y, target);
         return true;
@@ -40,26 +43,39 @@ CCSComponent.prototype.onTouchBegan = function(touch, event) {
     }
 
     return false;
-}
+};
 
 CCSComponent.prototype.onTouchMoved = function(touch, event) {
     var target = event.getCurrentTarget();
     var delta = touch.getDelta();
-    cc.log('touchMoved ' + this.NAME + ' x:' + delta.x + ',y:' + delta.y)
+    cc.log('touchMoved ' + this.NAME + ' x:' + delta.x + ',y:' + delta.y);
     if (this.viewOption.canDrag) {
         this.x += delta.x;
         this.y += delta.y;
     }
     return this._delegate.onTouchMoved && this._delegate.onTouchMoved(delta, target);
-}
+};
 
 CCSComponent.prototype.onTouchEnded = function(touch, event) {
-    cc.log('touchEnded ' + this.NAME)
+    cc.log('touchEnded ' + this.NAME);
 
     var target = event.getCurrentTarget();
     var locationInNode = target.convertToNodeSpace(touch.getLocation());
-    return this._delegate.onTouchEnded && this._delegate.onTouchEnded(locationInNode.x, locationInNode.y, target)
-}
+    return this._delegate.onTouchEnded && this._delegate.onTouchEnded(locationInNode.x, locationInNode.y, target);
+};
+
+Component.prototype.findChild = function(name, root) {
+    root = root || this._root;
+    var names = name.split('/');
+    for (var i = 0; i < names.length; i++) {
+        root = root.getChildByName(names[i]);
+        if (root == null) {
+            cc.log('[Warn] node not find . ' + names[i]);
+            return null;
+        }
+    }
+    return root;
+};
 
 // CCSComponent.prototype.buttonEvent = function(sender,event) {
 //     this._delegate.buttonClick(sender,event);

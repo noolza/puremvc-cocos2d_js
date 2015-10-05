@@ -8,13 +8,14 @@ var Component = cc.Layer.extend({
     },
     onEnter : function() {
 	    this._super();
-	    cc.log(this._delegate.NAME + ' onEnter')
+	    cc.log(this._delegate.NAME + ' onEnter');
 	    if (this._delegate.onUpdate) {
 	        this.scheduleUpdate();
 	    }
+        this.setContentSize(cc.winSize);
         this.setupMode();
 	}
-})
+});
 Component.extend = cc.Class.extend;
 
 Component.prototype.setupMode = function() {
@@ -31,18 +32,20 @@ Component.prototype.setupMode = function() {
         this.setCascadeOpacityEnabled(true);
     }
 };
+
 Component.prototype.update = function(delta) {
     this._delegate.onUpdate(delta);
 };
+
 Component.prototype.getDelegate = function(delegate) {
     return this._delegate ;
-}
+};
 
 Component.prototype.setDelegate = function(delegate) {
     this._delegate = delegate;
     this.viewOption = delegate.getOption();
     this.NAME = delegate.NAME;
-}
+};
 
 Component.prototype.touchEnabled = function(enable) {
     if (!enable && this._touchListener) {
@@ -59,50 +62,37 @@ Component.prototype.touchEnabled = function(enable) {
         onTouchEnded: this.onTouchEnded.bind(this)
     });
     cc.eventManager.addListener(this._touchListener, this);
-}
+};
 
 Component.prototype.onTouchBegan = function(touch, event) {
-    cc.log('onTouchBegan ' + this.NAME)
+    cc.log('onTouchBegan ' + this.NAME);
     throw new Error('must override this function');
-}
+};
 
 Component.prototype.onTouchMoved = function(touch, event) {
     throw new Error('must override this function');
-}
+};
 
 Component.prototype.onTouchEnded = function(touch, event) {
     throw new Error('must override this function');
-}
+};
 
 Component.prototype.addChild = function(child, order, tag) {
     if (this._root != null) {
-        this._root.addChild(child, order || 0, tag || 0)
+        this._root.addChild(child, order || 0, tag || 0);
     } else {
     	this._root = child;
         cc.Layer.prototype.addChild.call(this, child, order || 0, tag || 0);
     }
-}
-
-Component.prototype.findChild = function(name, root) {
-    root = root || this._root
-    var names = name.split('/')
-    for (var i = 0; i < names.length; i++) {
-        root = root.getChildByName(names[i])
-        if (root == null) {
-            cc.log('[Warn] node not find . ' + names[i])
-            return null
-        }
-    }
-    return root
-}
+};
 
 Component.prototype.getRoot = function() {
-    return this._root
-}
+    return this._root;
+};
 
 Component.prototype.getChildByTag = function(tag) {
-    return this._root.getChildByTag(tag)
-}
+    return this._root.getChildByTag(tag);
+};
 
 Component.prototype.remove = function() {
     this.touchEnabled(false);
@@ -110,17 +100,17 @@ Component.prototype.remove = function() {
     this._delegate = null;
     this._root = null;
     this.removeFromParent();
-}
+};
 
 Component.prototype.onEnterTransitionDidFinish = function() {
-    cc.log(this.NAME + ' onEnterTransitionDidFinish')
+    cc.log(this.NAME + ' onEnterTransitionDidFinish');
     if (this._delegate.getOption().isScene()) {
-        this._delegate._onShowFinish(true)
+        this._delegate._onShowFinish(true);
     }
-}
+};
 
-Component.prototype.onExitTransitionDidStart = function() {}
-Component.prototype.onCleanup = function() {}
+Component.prototype.onExitTransitionDidStart = function() {};
+Component.prototype.onCleanup = function() {};
 
 // Component.prototype.textInputEvent = function( sender,event ){
 //  cc.log(sender.name + event)

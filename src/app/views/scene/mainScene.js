@@ -26,7 +26,7 @@ mainScene.prototype.onRemoved = function() {
 };
 
 mainScene.prototype.onTouchBegan = function(x, y) {
-    cc.log("onTouchBegan. ", x, y);
+    // cc.log("onTouchBegan. ", x, y);
     return true;
 };
 // mainScene.prototype.onTouchMoved = function(x, y) {
