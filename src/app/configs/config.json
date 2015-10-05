@@ -8,6 +8,10 @@
 	],
 	"res" : [
 	    "res/cn/img/HelloWorld.png",
-	    "res/cn/ccs/mainScene.json"
+	    "res/cn/img/hall_animation.plist",
+	    "res/cn/img/hall_animation.png",
+	    "res/cn/ccs/mainScene.json",
+	    "res/cn/img/texiao_junei_chuopoqipao.png",
+	    "res/cn/img/texiao_junei_chuopoqipao.plist"
 	]
 }

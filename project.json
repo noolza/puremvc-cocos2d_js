@@ -12,6 +12,7 @@
     ],
     "jsList":[
         "src/libs/puremvc-1.0.1.js",
+        "src/libs/underscore.js",
         "src/libs/module_crypto.js",
         
         "src/functions.js",
@@ -19,11 +20,10 @@
         "src/MyApp.js",
 
         "src/app/utils/AudioMgr.js",
-        "src/app/utils/UIFactory.js",
-        "src/app/utils/AnimationMgr.js",
+        "src/app/utils/AnimationHelper.js",
+        "src/app/utils/ViewFactory.js",
         
         "src/cocosmvc/models/DataProxy.js",
-        "src/cocosmvc/models/ProxyConfig.js",
 
         "src/cocosmvc/views/component/Component.js",
         "src/cocosmvc/views/component/CCSComponent.js",
@@ -33,12 +33,10 @@
         "src/cocosmvc/views/ViewTransition.js",
         "src/cocosmvc/commands/showView.js",
 
+        "src/app/configs/ProtocolConfig.js",
         "src/app/commands/startup.js",
 
         "src/app/views/scene/mainScene.js",
-        "src/app/views/ui/uiLog.js",
-
-        "src/app/models/testData.js"
-
+        "src/app/views/ui/uiLog.js"
     ]
 }
