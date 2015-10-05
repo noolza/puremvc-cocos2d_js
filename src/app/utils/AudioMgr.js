@@ -57,9 +57,6 @@ var AudioMgr = {
             loop = false;
         }
         var sID = cc.audioEngine.playEffect(this.res + file, loop);
-
-        //        cc.log("音效id:"+sID);
-
         return sID;
     },
 

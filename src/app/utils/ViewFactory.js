@@ -1,5 +1,5 @@
 
-var UIFactory = {
+var ViewFactory = {
     // resPath : must end with '/'
     init: function(facade) {
         this.facade = facade;
@@ -8,7 +8,7 @@ var UIFactory = {
     createView:function(id,isScene){
         var root = null;
         if(isScene){
-            root = new cc.Scene;
+            root = new cc.Scene();
             this.facade.runningScene = root;
         }
         var arr = id.split('_');
@@ -32,7 +32,7 @@ var UIFactory = {
 
         cc.log('resName: ' + resourceFile);
 
-        var parent = option.getParent(this.facade);
+        var parent = view.getParent();
 
         var node = null;
         var component = null;
@@ -86,7 +86,7 @@ var UIFactory = {
                         var documentCallbackControlEvents = animationManager.getDocumentCallbackControlEvents();
                         var btnEvent = function(sender, evt) {
                             return delegate[callbackName](sender, evt);
-                        }
+                        };
                         callbackNode.addTargetWithActionForControlEvents(delegate, btnEvent, documentCallbackControlEvents[i]);
                     } else {
                         callbackNode.setCallback(controller[callbackName], controller);
@@ -103,7 +103,7 @@ var UIFactory = {
         var readNode = readObj.node;
         
         if(readNode){
-            this.bindEvent(readNode,delegate)   
+            this.bindEvent(readNode,delegate);   
         }
         return readNode; 
     }, 
@@ -113,7 +113,7 @@ var UIFactory = {
             if (children[i] instanceof ccui.Button && delegate.buttonClick) {
                 children[i].addTouchEventListener(delegate.buttonClick, delegate);
             } else if (children[i] instanceof ccui.CheckBox && delegate.checkBoxEvent) {
-                children[i].addEventListener(delegate.checkBoxEvent, delegate)
+                children[i].addEventListener(delegate.checkBoxEvent, delegate);
             } else if (children[i] instanceof ccui.Slider && delegate.valueChangedEvent) { // || children[i] instanceof ccui.LoadingBar)
                 children[i].addEventListener(delegate.valueChangedEvent, delegate);
                 children[i].addTouchEventListener(delegate.buttonClick, delegate);
@@ -134,4 +134,4 @@ var UIFactory = {
             }
         }
     }
-}
+};

@@ -2,26 +2,25 @@
 var MyApp = Class('MyApp',puremvc.Facade);
 var hall = {HallController:function(){}};
 MyApp.prototype.ctor = function(key) {
-}
+};
 
 MyApp.getInstance = function(key) {
-	key = key == undefined ? 0 : key;
-    var map = puremvc.Facade.instanceMap
+	key = key === undefined ? 0 : key;
+    var map = puremvc.Facade.instanceMap;
     if (puremvc.Facade.instanceMap[key] == null) {
     	var app = new MyApp(key);
     	puremvc.Facade.instanceMap[key] = app;
     } 
 
     return puremvc.Facade.instanceMap[key];
-}
+};
 
 MyApp.prototype.run = function() {
 	cc.log('game start');
     this._registeCommand();
     
-    this.trigger('startupCommand');
-    this.trigger('RunScene',['mainScene']);
-}
+    this.trigger('C_Startup');
+};
 
 MyApp.prototype._registeCommand = function() {
     var classMgr = puremvc.ClassManager;
@@ -31,32 +30,41 @@ MyApp.prototype._registeCommand = function() {
             cc.log('registerCommand:'+key);
         }
     }
-    this.registerCommand('ShowWindow',ShowViewCommand);
-    this.registerCommand('HideWindow',ShowViewCommand);
-    this.registerCommand('RunScene',ShowViewCommand);
-}
+    this.registerCommand('C_ShowWindow',ShowViewCommand);
+    this.registerCommand('C_HideWindow',ShowViewCommand);
+    this.registerCommand('C_RunScene',ShowViewCommand);
+};
 
 MyApp.prototype.registerViewObserver = function(notifierName,view){
     var observer = new puremvc.Observer(view.handleNotification, view);
     this.view.registerObserver(notifierName, observer);
-}
+};
 
 MyApp.prototype.trigger = function (notifierName) {
     if(this.view.observerMap[notifierName] == null){
         throw new Error('[MyApp.trigger] command not find :' + notifierName);
     }
-    this.sendNotification.apply(this,arguments);
-}
+    var args = Array.prototype.slice.call(arguments,1);
+    this.sendNotification(notifierName,args,null);
+};
 
 MyApp.prototype.getView = function(id) {
     return this.retrieveMediator(id);
-}
+};
 
-MyApp.prototype.removeView = function(id) {
-    this.removeMediator(id);
-}
+MyApp.prototype.removeView = function(view,callback) {
+    view = typeof(view) == 'string' ? this.getView(view) : view;
+    if(!view){
+        cc.warn('[removeView] view is not exist ' + typeof(view) == 'string' ? view : '');
+        return ;
+    }
+    if(view.getOption('isAutoRelease')){
+        this.removeMediator(view.getMediatorName());
+    }
+    ViewTransition.execute(view, false, callback);
+};
 
-MyApp.prototype.getData = function(dataName) {
+MyApp.prototype.getProxy = function(dataName) {
     var proxy = this.retrieveProxy(dataName);
     if (proxy == null) {
     	var classRef = puremvc.ClassManager[dataName];
@@ -66,18 +74,18 @@ MyApp.prototype.getData = function(dataName) {
     	}
     }
     if(!proxy){
-        throw new Error('DataProxy is undefined: '+bindModel[i])
+        throw new Error('DataProxy is undefined: '+bindModel[i]);
     }
     return proxy;
-}
+};
 
 MyApp.prototype.showView = function(isScene,id) {
 	cc.log('createView('+Array.prototype.join.call(arguments,',')+')');
 
-    var isShow = true
+    var isShow = true;
     var args = Array.prototype.slice.call(arguments, 2);
     if (args[0] && typeof(args[0]) == "boolean") {
-        isShow = args[0]
+        isShow = args[0];
     } else {
     	args.unshift(isShow);
     }
@@ -90,13 +98,20 @@ MyApp.prototype.showView = function(isScene,id) {
     }
 
     if (view == null) {                       
-        view = UIFactory.createView(id,isScene);
+        view = ViewFactory.createView(id,isScene);
         view._init.apply(view,args);
     }
 
     if (isShow) {
         args.shift();
-    	view.show.apply(view,args);
+
+        if (view.isShown()) {
+            view.onShow.apply(view,args);
+        } else {
+            ViewTransition.execute(view, true, view._onShowFinish);
+            view._isShown = true;
+        }
+
         if(!isScene){
             if(view.getOption('isHideOther')){
                 if(this.currentView){
@@ -111,18 +126,18 @@ MyApp.prototype.showView = function(isScene,id) {
         }
     }
     return view;
-}
+};
 
 MyApp.prototype.addView = function(id) {
     Array.prototype.unshift.call(arguments,false);
     return this.showView.apply(this,arguments);
-}
+};
 
 MyApp.prototype.runScene = function(id) {
     Array.prototype.unshift.call(arguments,true);
     return this.showView.apply(this,arguments);
-}
+};
 
 MyApp.prototype.error = function (msg) {
     // body...
-}
+};

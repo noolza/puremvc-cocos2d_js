@@ -1,7 +1,8 @@
-var startupCommand = Class('startupCommand',puremvc.SimpleCommand)
+var startupCommand = Class('C_Startup',puremvc.SimpleCommand);
 
 startupCommand.prototype.execute = function(){
 	AudioMgr.init(this.facade);
-	UIFactory.init(this.facade);
-}
+	ViewFactory.init(this.facade);
+    this.facade.trigger('C_RunScene','mainScene');
+};
 
