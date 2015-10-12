@@ -2,7 +2,51 @@ var CCBComponent = Component.extend({
     ctor: function(delegate) {
         this._super(delegate);
     }
-})
+});
+
+CCBComponent.prototype.loadFile = function(resourceFile, delegate,parent) {
+    var parentSize = parent? parent.getContentSize() : this.getContentSize();
+    if (!cc.BuilderReader.controllerClassCache['CCBProxy']) {
+        cc.BuilderReader.registerController('CCBProxy', {});
+    }
+
+    var readNode = null;
+    if (jsb.fileUtils.isFileExist(resourceFile)) {
+
+        readNode = cc.BuilderReader.load(resourceFile, delegate, parentSize);
+        var ccbProxy = readNode.controller;
+        for (var k in ccbProxy) {
+            if (typeof(ccbProxy[k]) != 'function') {
+                delegate[k] = ccbProxy[k];
+            }
+        }
+        var animationManager = readNode.animationManager;
+        var documentCallbackNames = animationManager.getDocumentCallbackNames();
+        var documentCallbackNodes = animationManager.getDocumentCallbackNodes();
+
+        for (var i = 0; i < documentCallbackNames.length; i++) {
+            var callbackName = documentCallbackNames[i];
+            var callbackNode = documentCallbackNodes[i];
+
+            if (delegate[callbackName] === undefined) {
+                cc.log("Warning: " + callbackName + " is undefined.");
+            } else {
+                if (callbackNode instanceof cc.ControlButton) {
+                    var documentCallbackControlEvents = animationManager.getDocumentCallbackControlEvents();
+                    var btnEvent = function(sender, evt) {
+                        return delegate[callbackName](sender, evt);
+                    };
+                    callbackNode.addTargetWithActionForControlEvents(delegate, btnEvent, documentCallbackControlEvents[i]);
+                } else {
+                    callbackNode.setCallback(controller[callbackName], controller);
+                }
+            }
+        }
+    }
+    parent && parent.addChild(readNode);
+
+    return readNode;
+},
 
 CCBComponent.prototype.onTouchBegan = function(touch, event) {
     var target = event.getCurrentTarget();

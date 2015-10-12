@@ -37,6 +37,7 @@
         "src/app/commands/startup.js",
 
         "src/app/views/scene/mainScene.js",
-        "src/app/views/ui/uiLog.js"
+        "src/app/views/ui/uiLog.js",
+        "src/app/views/themes/window_normal.js"
     ]
 }

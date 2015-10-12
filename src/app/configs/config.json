@@ -7,7 +7,10 @@
 		"res/cn/sound"
 	],
 	"res" : [
+	    "res/cn/img/hall_pop_window_bg.png",
 	    "res/cn/img/HelloWorld.png",
-	    "res/cn/ccs/mainScene.json"
+	    "res/cn/ccs/mainScene.json",
+	    "res/cn/ccs/window_normal.json",
+	    "res/cn/ccs/theme.json"
 	]
 }

@@ -1,9 +1,15 @@
 var Component = cc.Layer.extend({
-    ctor: function(delegate) {
+    ctor: function(resourceFile,delegate) {
         this._super();
+        this.setContentSize(cc.winSize);
+        this.setDelegate(delegate);
         if(delegate) {
         	this.setDelegate(delegate);
             this.NAME = delegate._id;
+        } 
+        if(resourceFile){
+            var node = this.loadFile(resourceFile,delegate,this);
+            // this.addChild(node,0,0);
         }
     },
     onEnter : function() {
@@ -11,25 +17,21 @@ var Component = cc.Layer.extend({
 	    cc.log(this._delegate.NAME + ' onEnter');
 	    if (this._delegate.onUpdate) {
 	        this.scheduleUpdate();
-	    }
-        this.setContentSize(cc.winSize);
-        this.setupMode();
+	    }        
 	}
 });
-Component.extend = cc.Class.extend;
 
-Component.prototype.setupMode = function() {
-    var option = this._delegate.getOption();
-    var mode = option.mode;
-    if (option.touchMode == ViewOption.TOUCH_NONE) {
-        this.touchEnabled(false);
-    } else {
-        if (this._delegate.needTouch()) {
-            this.touchEnabled(true);
-        }
+Component.extend = cc.Class.extend;
+Component.create = function(resourceFile,delegate){
+    cc.log('[Component] resName:'+resourceFile);
+    
+    if(!resourceFile){
+        return new Component();
     }
-    if (option.showAction == 'fadeIn' || option.hideAction == 'fadeOut') {
-        this.setCascadeOpacityEnabled(true);
+    if(resourceFile.indexOf('.json')>=0){
+        return new CCSComponent(resourceFile,delegate);
+    }if(resourceFile.indexOf('.ccbi')>=0){
+        return new CCBComponent(resourceFile,delegate);
     }
 };
 
@@ -43,8 +45,6 @@ Component.prototype.getDelegate = function(delegate) {
 
 Component.prototype.setDelegate = function(delegate) {
     this._delegate = delegate;
-    this.viewOption = delegate.getOption();
-    this.NAME = delegate.NAME;
 };
 
 Component.prototype.touchEnabled = function(enable) {
@@ -104,9 +104,19 @@ Component.prototype.remove = function() {
 
 Component.prototype.onEnterTransitionDidFinish = function() {
     cc.log(this.NAME + ' onEnterTransitionDidFinish');
-    if (this._delegate.getOption().isScene()) {
-        this._delegate._onShowFinish(true);
+    if (this._delegate.isScene()) {
+        this._delegate.onShowFinish();
     }
+};
+/**
+ * [loadFile description]
+ * @param  {!String} resourceFile
+ * @param  {?String} delegate
+ * @param  {?cc.Node} parent
+ * @return {cc.Node}
+ */
+Component.prototype.loadFile = function(resourceFile, delegate, parent) {
+    throw new Error('you must override this function');
 };
 
 Component.prototype.onExitTransitionDidStart = function() {};

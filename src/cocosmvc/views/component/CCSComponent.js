@@ -4,6 +4,50 @@ var CCSComponent = Component.extend({
     // }
 });
 
+CCSComponent.prototype.loadFile = function(resourceFile, delegate, parent) {
+    if(resourceFile.indexOf('.json') < 0 ){
+        throw new Error('file type error');
+    }
+
+    var readObj = ccs.load(Const.UI_FILE_JSON_PATH + resourceFile);
+    var readNode = readObj.node;
+
+    if (readNode && delegate) {
+        this.bindEvent(readNode, delegate);
+    }
+    parent && parent.addChild(readNode);
+    cc.log('[CCSComponent] load json finish ' + resourceFile);
+    return readNode;
+},
+
+CCSComponent.prototype.bindEvent = function(root, delegate) {
+    var children = root.getChildren();
+    for (var i = 0; i < children.length; i++) {
+        if (children[i] instanceof ccui.Button && delegate.buttonClick) {
+            children[i].addTouchEventListener(delegate.buttonClick, delegate);
+        } else if (children[i] instanceof ccui.CheckBox && delegate.checkBoxEvent) {
+            children[i].addEventListener(delegate.checkBoxEvent, delegate);
+        } else if (children[i] instanceof ccui.Slider && delegate.valueChangedEvent) { // || children[i] instanceof ccui.LoadingBar)
+            children[i].addEventListener(delegate.valueChangedEvent, delegate);
+            children[i].addTouchEventListener(delegate.buttonClick, delegate);
+        } else if (children[i] instanceof ccui.TextField && delegate.textInputEvent) {
+            children[i].addTouchEventListener(delegate.textInputEvent, delegate);
+        } else if (children[i] instanceof ccui.ScrollView) {
+            if (delegate.scrollEvent) {
+                children[i].addEventListener(delegate.scrollEvent, delegate);
+            }
+            this.bindEvent(children[i], delegate);
+        } else if (children[i] instanceof ccui.PageView) {
+            if (delegate.onPageEvent) {
+                children[i].addEventListener(delegate.onPageEvent, delegate);
+            }
+            this.bindEvent(children[i], delegate);
+        } else {
+            this.bindEvent(children[i], delegate);
+        }
+    }
+},
+
 CCSComponent.prototype.onTouchBegan = function(touch, event) {
     var target = event.getCurrentTarget();
     var locationInNode = target.convertToNodeSpace(touch.getLocation());
@@ -70,7 +114,7 @@ Component.prototype.findChild = function(name, root) {
     for (var i = 0; i < names.length; i++) {
         root = root.getChildByName(names[i]);
         if (root == null) {
-            cc.log('[Warn] node not find . ' + names[i]);
+            cc.log('[Warn] node not find ' + names[i]);
             return null;
         }
     }

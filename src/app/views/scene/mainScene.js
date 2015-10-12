@@ -2,8 +2,9 @@ var mainScene = Class("mainScene", ViewBase);
 
 mainScene.prototype.initOption = function() {
     this.setOption('mode', ViewOption.MODE_SCENE);
-    // this.setOption('showAction', 'sceneFade')
-    this.setOption('bindUI', 'uiLog');
+    this.setOption('showAction', 'sceneFade');
+    this.setOption('resourceName', 'mainScene.json');
+    this.setOption('bindUI', 'UILog');
 };
 
 mainScene.prototype.onCreate = function() {

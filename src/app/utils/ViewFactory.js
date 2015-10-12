@@ -1,68 +1,56 @@
-
 var ViewFactory = {
-    // resPath : must end with '/'
-    init: function(facade) {
-        this.facade = facade;
-        cc.BuilderReader.registerController('CCBProxy', {});
-    },
-    createView:function(id,isScene){
+    createView: function(id, parent) {
         var root = null;
-        if(isScene){
-            root = new cc.Scene();
-            this.facade.runningScene = root;
-        }
-        var arr = id.split('_');
+
+        var arr = id.split('-');
         var view = null;
         var classRef = puremvc.ClassManager[arr[0]];
         if (!classRef) {
             cc.log('[Warn]createView: view class not find: ' + arr[0]);
-            view = new ViewBase(arr[0],root);
+            view = new ViewBase(arr[0], parent);
         } else {
-            view = new classRef(arr[0],root);
+            view = new classRef(arr[0], parent);
         }
-        this.facade.registerMediator(view);
-
-        var component = this.createComponent(view);        
-        view.setViewComponent(component);
+        // var option = view.getOption();
+        // var resourceFile = option.getResourceFile();
+        // var component = this.createComponent(resourceFile,parent,view);
+        // view.setViewComponent(component);
         return view;
     },
-    createComponent:function(view){
-        var option = view.getOption();
-        var resourceFile = option.getResourceFile();
-
-        cc.log('resName: ' + resourceFile);
-
-        var parent = view.getParent();
+    createComponent: function(resourceFile,parent,delegate) {
+        
+        var resourceType = resourceFile.indexOf('.json') >= 0 ? Const.UI_FILE_TYPE_JSON : Const.UI_FILE_TYPE_CCBI;
+        cc.log('[createComponent] resName: ' + resourceFile);
 
         var node = null;
         var component = null;
 
-        if(option.resourceType == Const.UI_FILE_TYPE_JSON){
-            node = this.loadCCS(Const.UI_FILE_JSON_PATH + resourceFile,view);
-            component = new CCSComponent(view);
+        if (resourceType == Const.UI_FILE_TYPE_JSON) {
+            node = this.loadJson(Const.UI_FILE_JSON_PATH + resourceFile, delegate);
+            component = new CCSComponent(delegate);
         } else {
-            var parentSize = parent.getContentSize();
+            var parentSize = parent != null ? parent.getContentSize() : cc.winSize;
             cc.BuilderReader.setResourcePath(Const.UI_FILE_CCBI_PATH);
-            node = this.loadCCBI(resourceFile,view,parentSize);
-            component = new CCBComponent(view);
+            node = this.loadCCBI(resourceFile, delegate, parentSize);
+            component = new CCBComponent(delegate);
         }
         if (!node) {
             cc.warn('[createComponent]resourceFile not exist or read error ' + resourceFile);
             node = new cc.Node();
-        } 
+        }
 
-        node.setAnchorPoint(cc.p(0.5,0.5));
-        node.setPosition(cc.p(cc.winSize.width/2,cc.winSize.height/2));
         component.addChild(node);
         LogNodesName(component);
-        
-        parent.addChild(component,option.getZOrder(),option.tag);
         return component;
     },
-    loadCCBI : function (resourceFile , delegate, parentSize) {
+    loadCCBI: function(resourceFile, delegate, parentSize) {
         if (!parentSize || cc.sizeEqualToSize(parentSize, cc.SizeZero())) {
             parentSize = cc.winSize;
         }
+        if (!cc.BuilderReader.controllerClassCache['CCBProxy']) {
+            cc.BuilderReader.registerController('CCBProxy', {});
+        }
+
         var readNode = null;
         if (jsb.fileUtils.isFileExist(resourceFile)) {
 
@@ -96,20 +84,22 @@ var ViewFactory = {
                 }
             }
         }
-        
+
         return readNode;
     },
-    loadCCS : function(resourceFile,delegate) {
-    
+
+    loadJson: function(resourceFile, delegate) {
+
         var readObj = ccs.load(resourceFile);
         var readNode = readObj.node;
-        
-        if(readNode){
-            this.bindEvent(readNode,delegate);   
+
+        if (readNode) {
+            this.bindEvent(readNode, delegate);
         }
-        return readNode; 
-    }, 
-    bindEvent : function(root, delegate) {
+        return readNode;
+    },
+
+    bindEvent: function(root, delegate) {
         var children = root.getChildren();
         for (var i = 0; i < children.length; i++) {
             if (children[i] instanceof ccui.Button && delegate.buttonClick) {

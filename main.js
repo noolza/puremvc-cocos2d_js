@@ -48,6 +48,7 @@
  */
 
 cc.game.onStart = function(){
+	cc.log('game onStart')
     if (cc.sys.isNative) {
         var searchPaths = jsb.fileUtils.getSearchPaths();
         var cfg = JSON.parse(jsb.fileUtils.getStringFromFile("src/app/configs/config.json"));

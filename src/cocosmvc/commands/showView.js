@@ -6,6 +6,7 @@ var ShowViewCommand = Class('C_ShowView', puremvc.SimpleCommand);
  *         trigger('C_ShowWindow','uiId',param0,arg_)
  *         sendNotification('C_RunScene','sceneId',type);
  * @param  {[facade.Notification]} 
+ * @return {[void]}
  */
 ShowViewCommand.prototype.execute = function(notification) {
     var name = notification.getName();
@@ -23,8 +24,6 @@ ShowViewCommand.prototype.execute = function(notification) {
             view.close();
         }
     } else {
-        var isScene = name == 'C_RunScene';
-        params.unshift(isScene);
-        this.facade.showView.apply(this.facade, params);
+        this.facade.addView.apply(this.facade, params);
     }
 };
