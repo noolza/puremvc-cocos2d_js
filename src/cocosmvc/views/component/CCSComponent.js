@@ -70,7 +70,7 @@ Component.prototype.findChild = function(name, root) {
     for (var i = 0; i < names.length; i++) {
         root = root.getChildByName(names[i]);
         if (root == null) {
-            cc.log('[Warn] node not find . ' + names[i]);
+            cc.log('[Warn] node not find ' + names[i]);
             return null;
         }
     }

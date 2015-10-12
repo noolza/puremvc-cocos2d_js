@@ -17,8 +17,6 @@ uiLog.prototype.initOption = function(){
 uiLog.prototype.onCreate = function(){
 	var label = cc.LabelTTF.create('Hello world!','Arial',64);
 	this.addChild(label);
-	// label.x = cc.winSize.width/2;
-	// label.y = cc.winSize.height/2;
 };
 
 uiLog.prototype.fresh = function(){
@@ -32,7 +30,6 @@ uiLog.prototype.onShown = function(){
 
 uiLog.prototype.onClose = function(){
 	// body
-
 };
 
 uiLog.prototype.onRemoved = function(){
@@ -64,12 +61,4 @@ uiLog.prototype.editBoxTextChanged = function (sender, text) {
 
 uiLog.prototype.editBoxReturn = function (sender) {
 	cc.log(sender.getString());	
-};
-
-ViewBase.prototype.handleNotification = function(notification){ 
-	
-};
-ViewBase.prototype.onTouchBegan = function(x, y) {
-    // cc.log("onTouchBegan. ", x, y);
-    return true;
 };

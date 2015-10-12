@@ -13,25 +13,9 @@ var Component = cc.Layer.extend({
 	        this.scheduleUpdate();
 	    }
         this.setContentSize(cc.winSize);
-        this.setupMode();
 	}
 });
 Component.extend = cc.Class.extend;
-
-Component.prototype.setupMode = function() {
-    var option = this._delegate.getOption();
-    var mode = option.mode;
-    if (option.touchMode == ViewOption.TOUCH_NONE) {
-        this.touchEnabled(false);
-    } else {
-        if (this._delegate.needTouch()) {
-            this.touchEnabled(true);
-        }
-    }
-    if (option.showAction == 'fadeIn' || option.hideAction == 'fadeOut') {
-        this.setCascadeOpacityEnabled(true);
-    }
-};
 
 Component.prototype.update = function(delta) {
     this._delegate.onUpdate(delta);
@@ -104,8 +88,8 @@ Component.prototype.remove = function() {
 
 Component.prototype.onEnterTransitionDidFinish = function() {
     cc.log(this.NAME + ' onEnterTransitionDidFinish');
-    if (this._delegate.getOption().isScene()) {
-        this._delegate._onShowFinish(true);
+    if (this._delegate.isScene()) {
+        this._delegate.onShowFinish();
     }
 };
 

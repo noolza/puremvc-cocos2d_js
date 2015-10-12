@@ -1,36 +1,29 @@
 
 var ViewFactory = {
-    // resPath : must end with '/'
-    init: function(facade) {
-        this.facade = facade;
+    init: function() {
+        // this.facade = facade;
         cc.BuilderReader.registerController('CCBProxy', {});
     },
-    createView:function(id,isScene){
+    createView:function(id){
         var root = null;
-        if(isScene){
-            root = new cc.Scene();
-            this.facade.runningScene = root;
-        }
+
         var arr = id.split('_');
         var view = null;
         var classRef = puremvc.ClassManager[arr[0]];
         if (!classRef) {
             cc.log('[Warn]createView: view class not find: ' + arr[0]);
-            view = new ViewBase(arr[0],root);
+            view = new ViewBase(arr[0]);
         } else {
-            view = new classRef(arr[0],root);
+            view = new classRef(arr[0]);
         }
-        this.facade.registerMediator(view);
-
-        var component = this.createComponent(view);        
-        view.setViewComponent(component);
+        
         return view;
     },
     createComponent:function(view){
         var option = view.getOption();
         var resourceFile = option.getResourceFile();
 
-        cc.log('resName: ' + resourceFile);
+        cc.log('[createComponent] resName: ' + resourceFile);
 
         var parent = view.getParent();
 
@@ -51,8 +44,8 @@ var ViewFactory = {
             node = new cc.Node();
         } 
 
-        node.setAnchorPoint(cc.p(0.5,0.5));
-        node.setPosition(cc.p(cc.winSize.width/2,cc.winSize.height/2));
+        // node.setAnchorPoint(cc.p(0.5,0.5));
+        // node.setPosition(cc.p(cc.winSize.width/2,cc.winSize.height/2));
         component.addChild(node);
         LogNodesName(component);
         

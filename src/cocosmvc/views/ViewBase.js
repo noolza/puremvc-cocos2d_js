@@ -1,16 +1,31 @@
+/**
+ * [ViewBase description] view base class
+ * @author lihuiqun
+ * @Time   2015-10-10
+ */
 var ViewBase = Class("ViewBase", puremvc.Notifier);
 
-ViewBase.prototype.ctor = function(id,parent) {
+/**
+ * [ctor description] construction
+ * @Author lihuiqun
+ * @static
+ * @param  {!String=} id
+ * @return {void}
+ */
+ViewBase.prototype.ctor = function(id) {
+    this._id = id;
     this._isShown = false;
     this._notifications = ['MSG_HideOtherView'];
-    this._id = id;
     this.viewOption = new ViewOption();
-    this.setOption('resourceName',id);
-    if(parent){
-        this.setOption('parent',parent);
-    }
 };
 
+/**
+ * [onRegister description] Called by the View when the Mediator is registered
+ * @see MyApp.addView;
+ * @see facade.registerMediator
+ * @Author lihuiqun
+ * @return {void}
+ */
 ViewBase.prototype.onRegister = function() {
     this.facade = this.getFacade();
     if (this.initOption) {
@@ -18,13 +33,27 @@ ViewBase.prototype.onRegister = function() {
     }
 };
 
-ViewBase.prototype._init = function(isShow) {
+/**
+ * [init description] init
+ * @param  {!Boolean} isShow
+ * @param  {opt_args} custom params
+ * @return {void}
+ */
+ViewBase.prototype.init = function(isShow, opt_args) {
     cc.log('ViewInit(' + Array.prototype.join.call(arguments, ',') + ')');
-    
+
     if (!isShow) {
         this.viewComponent.setVisible(false);
     }
-    cc.log(this.NAME + ' created ');
+
+    this._setupMode();
+
+    var initPos = this.getOption('initPosition');
+    var root = this.viewComponent.getRoot();
+    if (!initPos) {
+        initPos = cc.p((cc.winSize.width - root.width) / 2, (cc.winSize.height - root.height) / 2);
+    }
+    root.setPosition(initPos);
 
     if (this.onCreate) {
         var args = Array.prototype.slice.call(arguments, 1);
@@ -32,80 +61,134 @@ ViewBase.prototype._init = function(isShow) {
     }
 };
 
-ViewBase.prototype.needTouch = function() {
-    if(this.getOption('touchMode') == ViewOption.TOUCH_NONE){
-        return false;
+ViewBase.prototype._setupMode = function() {
+    var option = this.viewOption;
+    var touchMode = option.touchMode;
+    if (touchMode == ViewOption.TOUCH_NONE) {
+        if (this.getOption('isClickClose') || this.getOption('canDrag')) {
+            throw new Error('[ViewBase] touchMode error');
+        }
+        this.viewComponent.touchEnabled(false);
+    } else {     
+        this.viewComponent.touchEnabled(true);
     }
-    return this.onTouchBegan || this.onTouchMoved || this.onTouchEnded || this.getOption('isClickClose') || this.getOption('canDrag');
+
+    if (option.showAction == 'fadeIn' || option.hideAction == 'fadeOut') {
+        this.viewComponent.setCascadeOpacityEnabled(true);
+    }
 };
 
-ViewBase.prototype.getParent = function(){
-    if(this.viewComponent){
+/**
+ * [needTouch description] if registe touch listner
+ * @return {Boolean}
+ */
+ViewBase.prototype.needTouch = function() {
+    return this.getOption('touchMode') != ViewOption.TOUCH_NONE;
+};
+
+/**
+ * [getParent description] get init parent or component
+ * @return {cc.Node}
+ */
+ViewBase.prototype.getParent = function() {
+    if (this.viewComponent) {
         return this.viewComponent.parent;
     }
-    var parent = this.parent;
-    if (typeof(parent) == 'string') {
-        var view = this.facade.getView(parent);
+    if (this.isScene()) {
+        return new cc.Scene();
+    }
+
+    var parentOpt = this.getOption('parent');
+    var parentNode = null;
+    if (typeof(parentOpt) == 'string') {
+        var view = this.facade.getView(parentOpt);
         if (view !== null) {
-            parent = view.getViewComponent();
-            if (parent === null) {
-                cc.log('[ViewBase] view parent not find ' + this.NAME + ' parentName: ' + parent);
+            parentNode = view.getViewComponent();
+            if (parentNode === null) {
+                cc.warn('[ViewBase] view parent not find ' + this.NAME + ' parentName: ' + parent);
             }
-        } else {
-            parent = null;
         }
     }
-    if (parent == null) { 
-        parent = this.facade.runningScene;
+    if (parentNode == null) {
+        parentNode = this.facade.runningScene;
     }
-    return parent;
+    return parentNode;
 };
 
+/**
+ * [getOption description] get view option or key value
+ * @static
+ * @param  {?String} key
+ * @return {Object}
+ */
 ViewBase.prototype.getOption = function(key) {
-    if(!key) {
+    if (!key) {
         return this.viewOption;
     }
     return this.viewOption[key];
 };
 
+/**
+ * [setOption description]
+ * @static
+ * @param  {!String} key
+ * @param  {Object} value
+ */
 ViewBase.prototype.setOption = function(key, value) {
     this.viewOption[key] = value;
 };
 
+/**
+ * [close description] hide or remove self
+ * @return {void}
+ */
 ViewBase.prototype.close = function() {
     if (this.autoHideTime) {
         this.autoHideTime = this.getOption('autoHideTime');
     }
-    this.getFacade().removeView(this,this._onShowFinish);
+    this.getFacade().removeView(this, this._onShowFinish);
     this.onClose && this.onClose();
     var bindUI = this.getOption('bindUI');
-    if(bindUI){
-        this.trigger('C_HideWindow',[bindUI]);
+    if (bindUI) {
+        this.trigger('C_HideWindow', [bindUI]);
     }
 };
 
-ViewBase.prototype.onShow = function() {};
+/**
+ * [onShow description]
+ * @param  {?var_args} opt_args custom params
+ * @return {void}
+ */
+ViewBase.prototype.onShow = function(opt_args) {};
 
-ViewBase.prototype._onShowFinish = function(isShow) {
-    cc.log(this.NAME + ' showFinish ' + isShow);
+/**
+ * [onShowFinish description] when show action finish do
+ * @param  {?var_args} opt_args custom params
+ * @return {void}
+ */
+ViewBase.prototype.onShowFinish = function(opt_args) {
+    cc.log(this.NAME + ' showFinish ');
+    this.onShown && this.onShown();
 
-    if (!isShow) {
-        this.onClosed && this.onClosed();
+    var bindui = this.getOption('bindUI');
+    if (bindui) {
+        this.trigger('C_ShowWindow', bindui);
+    }
+};
 
-        if (this.getOption('isAutoRelease')) {
-            this.viewComponent.remove();
-            this.onRelease && this.onRelease();
-        } else {
-            this.viewComponent.setVisible(false);
-        }
+/**
+ * [onShowFinish description] when hide action finish do
+ * @return {void}
+ */
+ViewBase.prototype.onHideFinish = function() {
+    cc.log(this.NAME + ' hideFinish ');
+    this.onClosed && this.onClosed();
+
+    if (this.getOption('isAutoRelease')) {
+        this.viewComponent.remove();
+        this.onRelease && this.onRelease();
     } else {
-        if (this.onShown) {
-            this.onShown();
-        }
-        var bindui = this.getOption('bindUI');
-        if (bindui) {
-            this.trigger('C_ShowWindow',bindui);
-        }
+        this.viewComponent.setVisible(false);
     }
 };
 
@@ -128,7 +211,7 @@ ViewBase.prototype.buttonClick = function(sender, event) {
 };
 
 ViewBase.prototype.getRoot = function() {
-    return this.viewComponent.getRoot();
+    return this.viewComponent;
 };
 
 ViewBase.prototype.getMediatorName = function() {
@@ -137,6 +220,10 @@ ViewBase.prototype.getMediatorName = function() {
 
 ViewBase.prototype.isShown = function() {
     return this._isShown;
+};
+
+ViewBase.prototype.setShown = function(state) {
+    this._isShown = state;
 };
 
 ViewBase.prototype.isScene = function() {
@@ -160,7 +247,7 @@ ViewBase.prototype.getViewComponent = function() {
 };
 
 ViewBase.prototype.listen = function(notifierName) {
-    
+
     if (this._notifications.indexOf(notifierName) >= 0) {
         cc.log('[Warn] already listen ' + notifierName);
         return;
@@ -179,8 +266,8 @@ ViewBase.prototype.listNotificationInterests = function() {
     return this._notifications;
 };
 
-ViewBase.prototype.handleNotification = function(notification){ 
-    if(notification.getName() == 'MSG_HideOtherView' && this != notification.getBody() && this.viewOption.isNormal()){
+ViewBase.prototype.handleNotification = function(notification) {
+    if (notification.getName() == 'MSG_HideOtherView' && this != notification.getBody() && this.viewOption.isNormal()) {
         this.close();
     }
     this.onMessage && this.onMessage(notification);

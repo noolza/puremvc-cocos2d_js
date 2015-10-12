@@ -51,6 +51,7 @@
               "X": 960.0,
               "Y": 640.0
             },
+            "Alpha": 113,
             "Name": "Default",
             "ctype": "SpriteObjectData"
           }
