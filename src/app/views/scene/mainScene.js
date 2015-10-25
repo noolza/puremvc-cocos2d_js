@@ -8,7 +8,7 @@ mainScene.prototype.initOption = function() {
 };
 
 mainScene.prototype.onCreate = function() {
-    
+    this.playAnimation('rot',true);
 };
 
 mainScene.prototype.fresh = function() {

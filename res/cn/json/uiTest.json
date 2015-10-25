@@ -1,5 +1,5 @@
 {
-  "ID": "eead1b2e-8f7c-4e94-85c3-ff850605947d",
+  "ID": "dbdc5d21-b033-4f6a-8dcd-1db25eebe1a8",
   "Version": "2.3.2.3",
   "Name": "uiTest",
   "Content": {
@@ -7,14 +7,15 @@
       "Animation": {
         "Duration": 15,
         "Speed": 1.0,
+        "ActivedAnimationName": "rotate",
         "Timelines": [
           {
-            "ActionTag": -1361303390,
+            "ActionTag": 1409772687,
             "Property": "Position",
             "Frames": [
               {
-                "X": 245.0,
-                "Y": 169.0,
+                "X": 132.5809,
+                "Y": 134.5849,
                 "FrameIndex": 0,
                 "EasingData": {
                   "Type": 0
@@ -24,7 +25,7 @@
               {
                 "X": 245.0,
                 "Y": 169.0,
-                "FrameIndex": 10,
+                "FrameIndex": 15,
                 "EasingData": {
                   "Type": 2
                 },
@@ -34,7 +35,7 @@
             "ctype": "TimelineData"
           },
           {
-            "ActionTag": -1361303390,
+            "ActionTag": 1409772687,
             "Property": "Scale",
             "Frames": [
               {
@@ -68,7 +69,7 @@
             "ctype": "TimelineData"
           },
           {
-            "ActionTag": -1361303390,
+            "ActionTag": 1409772687,
             "Property": "RotationSkew",
             "Frames": [
               {
@@ -108,62 +109,13 @@
         {
           "StartIndex": 0,
           "EndIndex": 15,
-          "Name": "rot",
+          "Name": "rotate",
           "ctype": "AnimationInfoData"
         }
       ],
       "ObjectData": {
-        "Tag": 3,
+        "Tag": 23,
         "Children": [
-          {
-            "FileData": {
-              "Type": "Normal",
-              "Path": "HelloWorld.png",
-              "Plist": ""
-            },
-            "Scale9Width": 960,
-            "Scale9Height": 640,
-            "AnchorPoint": {
-              "ScaleX": 0.5,
-              "ScaleY": 0.5
-            },
-            "Position": {
-              "X": 240.0,
-              "Y": 160.0
-            },
-            "Scale": {
-              "ScaleX": 1.0,
-              "ScaleY": 1.0
-            },
-            "CColor": {},
-            "IconVisible": false,
-            "PrePosition": {
-              "X": 0.5,
-              "Y": 0.5
-            },
-            "PercentWidthEnable": true,
-            "PercentHeightEnable": true,
-            "PercentWidthEnabled": true,
-            "PercentHeightEnabled": true,
-            "PreSize": {
-              "X": 0.84,
-              "Y": 0.83
-            },
-            "HorizontalEdge": "BothEdge",
-            "VerticalEdge": "BothEdge",
-            "LeftMargin": 38.4,
-            "RightMargin": 38.4,
-            "TopMargin": 27.2,
-            "BottomMargin": 27.2,
-            "Tag": 6,
-            "ActionTag": -959233040,
-            "Size": {
-              "X": 403.2,
-              "Y": 265.6
-            },
-            "Name": "Image",
-            "ctype": "ImageViewObjectData"
-          },
           {
             "FileData": {
               "Type": "Normal",
@@ -179,8 +131,8 @@
               "ScaleY": 0.5
             },
             "Position": {
-              "X": 245.0,
-              "Y": 169.0
+              "X": 132.5809,
+              "Y": 134.5849
             },
             "Scale": {
               "ScaleX": 1.0,
@@ -190,19 +142,20 @@
             "CColor": {},
             "IconVisible": false,
             "PrePosition": {
-              "X": 0.5104,
-              "Y": 0.5281
+              "X": 0.5179,
+              "Y": 0.5257
             },
             "PreSize": {
               "X": 0.0,
               "Y": 0.0
             },
-            "LeftMargin": 200.0,
-            "RightMargin": 190.0,
-            "TopMargin": 73.0,
-            "BottomMargin": 91.0,
-            "Tag": 6,
-            "ActionTag": -1361303390,
+            "LeftMargin": 87.5809,
+            "RightMargin": 78.4191,
+            "TopMargin": 43.4151,
+            "BottomMargin": 56.5849,
+            "Tag": 24,
+            "FrameEvent": "animcall",
+            "ActionTag": 1409772687,
             "Size": {
               "X": 90.0,
               "Y": 156.0
@@ -212,15 +165,14 @@
           }
         ],
         "Size": {
-          "X": 480.0,
-          "Y": 320.0
+          "X": 256.0,
+          "Y": 256.0
         },
         "Name": "Layer",
         "ctype": "LayerObjectData"
       },
       "UsedResources": [
-        "hall_pop_window_bg.png",
-        "HelloWorld.png"
+        "hall_pop_window_bg.png"
       ],
       "ctype": "GameProjectData"
     }

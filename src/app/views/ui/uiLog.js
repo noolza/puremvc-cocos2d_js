@@ -30,8 +30,7 @@ uiLog.prototype.fresh = function(){
 
 uiLog.prototype.onShown = function(){
 	cc.log('uiLog onShown');
-	this.playAnimation('rot');
-		
+	this.playAnimation('rotate');
 };
 
 uiLog.prototype.onClose = function(){

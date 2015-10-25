@@ -217,9 +217,7 @@ ViewBase.prototype.setViewComponent = function(component) {
 };
 
 ViewBase.prototype.playAnimation = function(actionName, callback) {
-    var jsonName = this.getOption('resourceName');
-    // ccs.actionManager.playActionByName(jsonName,actionName);
-    ccs.actionManager.playActionByName('uiTest.json','rot');
+    this.viewComponent.playAnimation.apply(this.viewComponent,arguments);
 };
 
 ViewBase.prototype.loadFile = function(resourceFile, delegate, parent) {

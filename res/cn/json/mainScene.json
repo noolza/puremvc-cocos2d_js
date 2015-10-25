@@ -5,12 +5,113 @@
   "Content": {
     "Content": {
       "Animation": {
-        "Duration": 0,
+        "Duration": 15,
         "Speed": 1.0,
-        "Timelines": [],
+        "Timelines": [
+          {
+            "ActionTag": 1495510250,
+            "Property": "Position",
+            "Frames": [
+              {
+                "X": 245.0,
+                "Y": 169.0,
+                "FrameIndex": 0,
+                "EasingData": {
+                  "Type": 0
+                },
+                "ctype": "PointFrameData"
+              },
+              {
+                "X": 245.0,
+                "Y": 169.0,
+                "FrameIndex": 15,
+                "EasingData": {
+                  "Type": 2
+                },
+                "ctype": "PointFrameData"
+              }
+            ],
+            "ctype": "TimelineData"
+          },
+          {
+            "ActionTag": 1495510250,
+            "Property": "Scale",
+            "Frames": [
+              {
+                "X": 1.0,
+                "Y": 1.0,
+                "FrameIndex": 0,
+                "EasingData": {
+                  "Type": 0
+                },
+                "ctype": "ScaleValueFrameData"
+              },
+              {
+                "X": 1.0,
+                "Y": 1.0,
+                "FrameIndex": 10,
+                "EasingData": {
+                  "Type": 2
+                },
+                "ctype": "ScaleValueFrameData"
+              },
+              {
+                "X": 0.4444,
+                "Y": 0.3846,
+                "FrameIndex": 15,
+                "EasingData": {
+                  "Type": 0
+                },
+                "ctype": "ScaleValueFrameData"
+              }
+            ],
+            "ctype": "TimelineData"
+          },
+          {
+            "ActionTag": 1495510250,
+            "Property": "RotationSkew",
+            "Frames": [
+              {
+                "X": 0.0,
+                "Y": -0.0026,
+                "FrameIndex": 0,
+                "EasingData": {
+                  "Type": 0
+                },
+                "ctype": "ScaleValueFrameData"
+              },
+              {
+                "X": 360.0,
+                "Y": 359.998,
+                "FrameIndex": 10,
+                "EasingData": {
+                  "Type": 2
+                },
+                "ctype": "ScaleValueFrameData"
+              },
+              {
+                "X": 360.0,
+                "Y": 359.9961,
+                "FrameIndex": 15,
+                "EasingData": {
+                  "Type": 0
+                },
+                "ctype": "ScaleValueFrameData"
+              }
+            ],
+            "ctype": "TimelineData"
+          }
+        ],
         "ctype": "TimelineActionData"
       },
-      "AnimationList": [],
+      "AnimationList": [
+        {
+          "StartIndex": 0,
+          "EndIndex": 15,
+          "Name": "rot",
+          "ctype": "AnimationInfoData"
+        }
+      ],
       "ObjectData": {
         "Children": [
           {
@@ -51,8 +152,55 @@
               "X": 960.0,
               "Y": 640.0
             },
-            "Alpha": 113,
+            "Alpha": 126,
             "Name": "Default",
+            "ctype": "SpriteObjectData"
+          },
+          {
+            "FileData": {
+              "Type": "Normal",
+              "Path": "hall_pop_window_bg.png",
+              "Plist": ""
+            },
+            "BlendFunc": {
+              "Src": 770,
+              "Dst": 771
+            },
+            "AnchorPoint": {
+              "ScaleX": 0.5,
+              "ScaleY": 0.5
+            },
+            "Position": {
+              "X": 245.0,
+              "Y": 169.0
+            },
+            "Scale": {
+              "ScaleX": 1.0,
+              "ScaleY": 1.0
+            },
+            "RotationSkewY": -0.0026,
+            "CColor": {},
+            "IconVisible": false,
+            "PrePosition": {
+              "X": 0.2552,
+              "Y": 0.2641
+            },
+            "PreSize": {
+              "X": 0.0,
+              "Y": 0.0
+            },
+            "LeftMargin": 200.0,
+            "RightMargin": 670.0,
+            "TopMargin": 393.0,
+            "BottomMargin": 91.0,
+            "Tag": 7,
+            "FrameEvent": "animcall",
+            "ActionTag": 1495510250,
+            "Size": {
+              "X": 90.0,
+              "Y": 156.0
+            },
+            "Name": "hall_pop_window_bg_1",
             "ctype": "SpriteObjectData"
           }
         ],
@@ -64,6 +212,7 @@
         "ctype": "SingleNodeObjectData"
       },
       "UsedResources": [
+        "hall_pop_window_bg.png",
         "HelloWorld.png"
       ],
       "ctype": "GameProjectData"

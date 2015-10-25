@@ -1,15 +1,14 @@
 var Component = cc.Layer.extend({
     ctor: function(resourceFile,delegate) {
         this._super();
+        this._root = null;
         this.setContentSize(cc.winSize);
-        this.setDelegate(delegate);
         if(delegate) {
         	this.setDelegate(delegate);
             this.NAME = delegate._id;
         } 
         if(resourceFile){
-            var node = this.loadFile(resourceFile,delegate,this);
-            // this.addChild(node,0,0);
+            this.loadFile(resourceFile,delegate,this);
         }
     },
     onEnter : function() {
@@ -117,6 +116,10 @@ Component.prototype.onEnterTransitionDidFinish = function() {
  */
 Component.prototype.loadFile = function(resourceFile, delegate, parent) {
     throw new Error('you must override this function');
+};
+
+Component.prototype.playAnimation = function() {
+    cc.warn('you must override this function');
 };
 
 Component.prototype.onExitTransitionDidStart = function() {};

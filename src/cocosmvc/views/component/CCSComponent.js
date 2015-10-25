@@ -1,17 +1,16 @@
 var CCSComponent = Component.extend({
-    // ctor: function(delegate) {
-    //     this._super(delegate);
-    // }
+    ctor: function(resourceFile, delegate) {
+        this._super(resourceFile, delegate);
+    }
 });
 
 CCSComponent.prototype.loadFile = function(resourceFile, delegate, parent) {
-    if(resourceFile.indexOf('.json') < 0 ){
+    if (resourceFile.indexOf('.json') < 0) {
         throw new Error('file type error');
     }
 
-    var readObj = ccs.load(Const.UI_FILE_JSON_PATH + resourceFile);
-    var readNode = readObj.node;
-
+    this.readObject = ccs.load(Const.UI_FILE_JSON_PATH + resourceFile);
+    var readNode = this.readObject.node;
     if (readNode && delegate) {
         this.bindEvent(readNode, delegate);
     }
@@ -19,6 +18,30 @@ CCSComponent.prototype.loadFile = function(resourceFile, delegate, parent) {
     cc.log('[CCSComponent] load json finish ' + resourceFile);
     return readNode;
 },
+
+/**
+ * @desc playAnimation(0,10,true)
+ *       playAnimation('animName',true)
+ *       
+ * @param  {Number or String} startIdx or name
+ * @param  {Number or Boolean} endIdx or isLoop
+ * @param  {?Boolean} isLoop 
+ * @return {void}
+ */
+CCSComponent.prototype.playAnimation = function(var_opt) {
+    var action = this.readObject.action;
+    this._root.runAction(action);
+    var animName = typeof(var_opt) == 'string' ? var_opt : null;
+    var isLoop = typeof(arguments[arguments.length-1]) == 'boolean' ? arguments[arguments.length-1] : false;
+
+    if (animName) {
+        action.play(animName, isLoop);
+    } else {
+        var start = var_opt;
+        var end = arguments[1];
+        action.gotoFrameAndPlay(start, end, isLoop);
+    }
+};
 
 CCSComponent.prototype.bindEvent = function(root, delegate) {
     var children = root.getChildren();
@@ -71,15 +94,15 @@ CCSComponent.prototype.onTouchBegan = function(touch, event) {
     }
 
     var touchMode = option.touchMode;
-    if(touchMode == ViewOption.TOUCH_WINDOW ){
-        if(pointIn){
+    if (touchMode == ViewOption.TOUCH_WINDOW) {
+        if (pointIn) {
             delegate.onTouchBegan && delegate.onTouchBegan(locationInNode.x, locationInNode.y, target);
             return true;
         } else {
             cc.log('point out');
             return false;
         }
-    } else if(touchMode == ViewOption.TOUCH_SCREEN){
+    } else if (touchMode == ViewOption.TOUCH_SCREEN) {
         delegate.onTouchBegan && delegate.onTouchBegan(locationInNode.x, locationInNode.y, target);
         return true;
     } else {

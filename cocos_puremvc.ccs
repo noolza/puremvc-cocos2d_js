@@ -5,10 +5,10 @@
       <RootFolder Name=".">
         <Project Name="mainScene.csd" Type="Scene" />
         <Image Name="HelloWorld.png" />
-        <Project Name="uiTest.csd" Type="Layer" />
         <Project Name="window_normal.csd" Type="Layer" />
         <Image Name="hall_pop_window_bg.png" />
         <Project Name="theme.csd" Type="Layer" />
+        <Project Name="uiTest.csd" Type="Layer" />
       </RootFolder>
     </Group>
   </SolutionFolder>
